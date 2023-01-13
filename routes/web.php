@@ -27,17 +27,17 @@ Route::get('/FasilitasDanLayanan', 'FrontEnd\FasilitasDanLayananController@index
 Route::get('/dashboard', 'MainController@index')->name('dashboard')->middleware('auth');
 
 //Pasien
-Route::get('/pasien', 'PasienController@index')->name('pasien')->middleware('auth');
+// Route::get('/pasien', 'PasienController@index')->name('pasien')->middleware('auth');
 
-Route::get('/pasien/tambah/', 'PasienController@tambah_pasien')->name('pasien.tambah')->middleware('auth');
+// Route::get('/pasien/tambah/', 'PasienController@tambah_pasien')->name('pasien.tambah')->middleware('auth');
 
-Route::post('/pasien/tambah/simpan', 'PasienController@simpan_pasien')->name('pasien.simpan')->middleware('auth');
+// Route::post('/pasien/tambah/simpan', 'PasienController@simpan_pasien')->name('pasien.simpan')->middleware('auth');
 
-Route::post('/pasien/edit/update/', 'PasienController@update_pasien')->middleware('auth');
+// Route::post('/pasien/edit/update/', 'PasienController@update_pasien')->middleware('auth');
 
-Route::delete('/pasien/hapus/{id}','PasienController@hapus_pasien')->name('pasien.destroy')->middleware('auth');
+// Route::delete('/pasien/hapus/{id}','PasienController@hapus_pasien')->name('pasien.destroy')->middleware('auth');
 
-Route::get('/pasien/edit/{id}','PasienController@edit_pasien')->name('pasien.edit')->middleware('auth');
+// Route::get('/pasien/edit/{id}','PasienController@edit_pasien')->name('pasien.edit')->middleware('auth');
 //End Pasien
 
 //Obat
@@ -126,5 +126,20 @@ Route::delete('/users/delete/{id}', 'UserController@hapus')->name('user.destroy'
 
 
 //endUsers
+
+Route::group(['prefix'=>'agama','as'=>'agama.'], function()
+{
+  Route::get('/select', ['as' => 'select', 'uses' => 'AgamaController@select']);
+});
+
+Route::group(['prefix'=>'pasien','as'=>'pasien','middleware' => ['auth']], function()
+{
+  Route::get('/', ['uses' => 'PasienController@index']);
+  Route::get('/tambah', ['as' => '.tambah', 'uses' => 'PasienController@tambah_pasien']);
+  Route::post('/tambah/simpan', ['as' => '.simpan', 'uses' => 'PasienController@simpan_pasien']);
+  Route::get('/edit/update', ['as' => '.update', 'uses' => 'PasienController@update_pasien']);
+  Route::get('/edit/{id}', ['as' => '.edit', 'uses' => 'PasienController@edit_pasien']);
+  Route::delete('/hapus/{id}', ['as' => '.destroy', 'uses' => 'PasienController@hapus_pasien']);
+});
 
 

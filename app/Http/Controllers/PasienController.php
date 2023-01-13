@@ -42,22 +42,35 @@ class PasienController extends Controller
         $this->validate($request, [
             'Nama_Lengkap' => 'required|min:5|max:35',
             'Tanggal_Lahir' => 'required|before:today',
+            // 'NIK' => 'required',
+            'Alamat_KTP' => 'required',
             'Alamat' => 'required',
+            'Agama' => 'required',
             'Pekerjaan' => 'required',
             'no_handphone' => 'required|numeric',
+            'Status_Pernikahan' => 'required',
             'Jenis_Kelamin' => 'required',
-            'no_bpjs' => 'nullable|numeric|digits_between:1,15'
+            'Golongan_Darah' => 'required',
+            'no_bpjs' => 'nullable|numeric|digits_between:1,15',
+            'Penanggung_Jawab' => 'required',
+            'No_Penanggung_Jawab' => 'required|numeric',
         ]);
+
         DB::table('pasien')->insert([
             'nama' => $request->Nama_Lengkap,
             'tgl_lhr' => $request->Tanggal_Lahir,
+            'nik' => $request->NIK,
+            'alamat_ktp' => $request->Alamat_KTP,
             'alamat' => $request->Alamat,
+            'agama_id' => $request->Agama,
             'pekerjaan' => $request->Pekerjaan,
             'hp' => $request->no_handphone,
+            'status_pernikahan' => $request->Status_Pernikahan,
             'jk' => $request->Jenis_Kelamin,
-            'pendidikan' => $request->Pendidikan_terakhir,
+            'golongan_darah' => $request->Golongan_Darah,
             'no_bpjs' => $request->no_bpjs,
-            'alergi' => $request ->alergi,
+            'penanggung_jawab' => $request ->Penanggung_Jawab,
+            'no_telp_penanggung_jawab' => $request ->No_Penanggung_Jawab,
             'created_time' => Carbon::now(),
             'updated_time' => Carbon::now(),
         ]);

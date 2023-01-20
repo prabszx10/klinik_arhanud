@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Apr 27, 2020 at 06:41 AM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.2.28
+-- Host: localhost
+-- Generation Time: Jan 20, 2023 at 01:15 AM
+-- Server version: 10.1.37-MariaDB
+-- PHP Version: 7.2.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,8 +19,41 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `sklinik`
+-- Database: `klinik_arhanud`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `agama`
+--
+
+CREATE TABLE `agama` (
+  `id` int(4) NOT NULL,
+  `nama` varchar(100) DEFAULT NULL,
+  `keterangan` text,
+  `deleted` int(4) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `agama`
+--
+
+INSERT INTO `agama` (`id`, `nama`, `keterangan`, `deleted`) VALUES
+(1, 'Islam', NULL, 0),
+(2, 'Kristen', NULL, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `antrian`
+--
+
+CREATE TABLE `antrian` (
+  `id` int(4) NOT NULL,
+  `pasien_id` int(4) NOT NULL,
+  `created_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -34,7 +67,7 @@ CREATE TABLE `failed_jobs` (
   `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -48,9 +81,9 @@ CREATE TABLE `lab` (
   `nama` varchar(25) NOT NULL,
   `satuan` varchar(10) NOT NULL,
   `harga` int(6) NOT NULL,
-  `created_time` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_time` timestamp NOT NULL DEFAULT current_timestamp(),
-  `deleted` tinyint(1) DEFAULT 0
+  `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted` tinyint(1) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -135,9 +168,9 @@ CREATE TABLE `obat` (
   `satuan` varchar(20) NOT NULL,
   `stok` int(5) NOT NULL,
   `harga` int(9) NOT NULL,
-  `created_time` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_time` datetime NOT NULL DEFAULT current_timestamp(),
-  `deleted` tinyint(1) DEFAULT 0
+  `created_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted` tinyint(1) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -166,22 +199,35 @@ CREATE TABLE `pasien` (
   `hp` varchar(14) NOT NULL,
   `pendidikan` varchar(16) DEFAULT NULL,
   `pekerjaan` varchar(20) NOT NULL,
-  `no_bpjs` int(15) DEFAULT NULL,
-  `alergi` text DEFAULT NULL,
+  `no_bpjs` bigint(20) DEFAULT NULL,
+  `alergi` text,
   `created_time` datetime NOT NULL,
   `updated_time` datetime NOT NULL,
-  `deleted` tinyint(1) DEFAULT 0
+  `deleted` tinyint(1) DEFAULT '0',
+  `rm_id` int(5) DEFAULT NULL,
+  `nik` varchar(50) DEFAULT NULL,
+  `alamat_ktp` varchar(50) DEFAULT NULL,
+  `agama_id` int(4) DEFAULT NULL,
+  `status_pernikahan` varchar(50) DEFAULT NULL,
+  `penanggung_jawab` varchar(50) DEFAULT NULL,
+  `no_telp_penanggung_jawab` varchar(100) DEFAULT NULL,
+  `golongan_darah` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `pasien`
 --
 
-INSERT INTO `pasien` (`id`, `nama`, `tgl_lhr`, `jk`, `alamat`, `hp`, `pendidikan`, `pekerjaan`, `no_bpjs`, `alergi`, `created_time`, `updated_time`, `deleted`) VALUES
-(1, 'Jajang Rukmana Sukarna', '2020-04-01', 'Perempuan', 'JAKARTA', '082191019181', 'SMP', 'Buruh', 9182717, 'tidak ada alergi', '0000-00-00 00:00:00', '2020-04-27 03:48:16', 0),
-(2, 'Abdul Somara', '1991-01-01', 'Laki-laki', 'Garut indah sekali jaya tentrem abadi dan tak terlupakan', '0918212111', NULL, 'Pengangguran', 1092811221, 'alergi kamu', '0000-00-00 00:00:00', '2020-04-27 03:58:25', 0),
-(6, 'Pinkan Rambo', '1991-02-01', 'perempuan', 'Hutan', '019281992', 'Tidak Ssekolah', 'Model', NULL, NULL, '2020-04-27 04:01:21', '2020-04-27 04:01:21', 0),
-(7, 'Fia Jatuh', '1991-01-01', 'Laki-laki', 'Panggung', '01999212', 'Tidak Ssekolah', 'soundsystem', NULL, NULL, '2020-04-27 04:05:21', '2020-04-27 04:05:21', 0);
+INSERT INTO `pasien` (`id`, `nama`, `tgl_lhr`, `jk`, `alamat`, `hp`, `pendidikan`, `pekerjaan`, `no_bpjs`, `alergi`, `created_time`, `updated_time`, `deleted`, `rm_id`, `nik`, `alamat_ktp`, `agama_id`, `status_pernikahan`, `penanggung_jawab`, `no_telp_penanggung_jawab`, `golongan_darah`) VALUES
+(1, 'Jajang Rukmana Sukarna', '2020-04-01', 'Perempuan', 'JAKARTA', '082191019181', 'SMP', 'Buruh', 9182717, 'tidak ada alergi', '0000-00-00 00:00:00', '2020-04-27 03:48:16', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2, 'Abdul Somara', '1991-01-01', 'Laki-laki', 'Garut indah sekali jaya tentrem abadi dan tak terlupakan', '0918212111', NULL, 'Pengangguran', 1092811221, 'alergi kamu', '0000-00-00 00:00:00', '2020-04-27 03:58:25', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(6, 'Pinkan Rambo', '1991-02-01', 'perempuan', 'Hutan', '019281992', 'Tidak Ssekolah', 'Model', NULL, NULL, '2020-04-27 04:01:21', '2020-04-27 04:01:21', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(7, 'Fia Jatuh', '1991-01-01', 'Laki-laki', 'Panggung', '01999212', 'Tidak Ssekolah', 'soundsystem', NULL, NULL, '2020-04-27 04:05:21', '2020-04-27 04:05:21', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(8, 'Jamal', '2023-01-11', 'Laki-laki', 'asdfasdf', '241234123412', NULL, 'qwrqwerqwer', 123456789012345, NULL, '2023-01-12 08:20:18', '2023-01-12 08:20:18', 0, NULL, '12412341234123412342', 'asdfas', 1, '0', 'aaa', '123444', 'B'),
+(9, 'Haidar Rais', '2023-01-13', 'Laki-laki', 'asfsad', '12342134', NULL, 'qwerqwer', 1256172818199999, NULL, '2023-01-19 13:49:40', '2023-01-19 13:49:40', 0, NULL, '28172938192', '10291826178', 1, '0', 'qwrqwer', '123412432134', 'A'),
+(10, 'Sulaeman alayubi', '2023-01-11', 'Laki-laki', 'ASD', '028330293838', NULL, 'WQERQWE', 214214, NULL, '2023-01-19 14:13:14', '2023-01-19 14:13:14', 0, NULL, '123456789', 'aD', 1, '0', 'judiran', '09228173894', 'A'),
+(11, 'Sulaeman alayubi 121', '2023-01-11', 'Laki-laki', 'ASD', '028330293838', NULL, 'WQERQWE', 214214, NULL, '2023-01-19 14:14:16', '2023-01-19 14:14:16', 0, NULL, '123456789123', 'aD', 1, '0', 'judiran', '09228173894', 'A'),
+(12, 'hhhhhh', '2023-01-13', 'Laki-laki', 'wqer', '1234243', NULL, 'qwerq', 123423, NULL, '2023-01-19 14:15:40', '2023-01-19 14:15:40', 0, NULL, '123456789012933', 'wqr', 1, '0', NULL, NULL, 'B');
 
 -- --------------------------------------------------------
 
@@ -218,16 +264,16 @@ CREATE TABLE `rm` (
   `ku` varchar(40) NOT NULL,
   `anamnesis` text NOT NULL,
   `pxfisik` text NOT NULL,
-  `lab` text DEFAULT NULL,
-  `hasil` text DEFAULT NULL,
+  `lab` text,
+  `hasil` text,
   `diagnosis` varchar(40) DEFAULT NULL,
-  `resep` text DEFAULT NULL,
-  `jumlah` text DEFAULT NULL,
-  `aturan` text DEFAULT NULL,
+  `resep` text,
+  `jumlah` text,
+  `aturan` text,
   `dokter` int(3) NOT NULL,
-  `created_time` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_time` datetime NOT NULL DEFAULT current_timestamp(),
-  `deleted` tinyint(1) DEFAULT 0
+  `created_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted` tinyint(1) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -258,7 +304,7 @@ CREATE TABLE `users` (
   `admin` tinyint(1) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted` tinyint(1) DEFAULT 0
+  `deleted` tinyint(1) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -275,6 +321,18 @@ INSERT INTO `users` (`id`, `username`, `profesi`, `name`, `email`, `email_verifi
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `agama`
+--
+ALTER TABLE `agama`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `antrian`
+--
+ALTER TABLE `antrian`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `failed_jobs`
@@ -310,7 +368,9 @@ ALTER TABLE `obat`
 -- Indexes for table `pasien`
 --
 ALTER TABLE `pasien`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `pasien_FK` (`rm_id`),
+  ADD KEY `pasien_FK_1` (`agama_id`);
 
 --
 -- Indexes for table `pengaturan`
@@ -325,64 +385,31 @@ ALTER TABLE `rm`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_username_unique` (`email`),
-  ADD UNIQUE KEY `username` (`username`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `failed_jobs`
+-- AUTO_INCREMENT for table `antrian`
 --
-ALTER TABLE `failed_jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `lab`
---
-ALTER TABLE `lab`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `metadata`
---
-ALTER TABLE `metadata`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
-
---
--- AUTO_INCREMENT for table `migrations`
---
-ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `obat`
---
-ALTER TABLE `obat`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+ALTER TABLE `antrian`
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `pasien`
 --
 ALTER TABLE `pasien`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `rm`
+-- Constraints for dumped tables
 --
-ALTER TABLE `rm`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `users`
+-- Constraints for table `pasien`
 --
-ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+ALTER TABLE `pasien`
+  ADD CONSTRAINT `pasien_FK` FOREIGN KEY (`rm_id`) REFERENCES `rm` (`id`),
+  ADD CONSTRAINT `pasien_FK_1` FOREIGN KEY (`agama_id`) REFERENCES `agama` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

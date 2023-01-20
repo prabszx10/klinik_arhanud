@@ -63,6 +63,10 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">Kegiatan dan Berita</a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="<?=URL::route('daftarOnline');?>">Daftar Online</a>
+            </li>
         </ul>
     </div>
 </nav>

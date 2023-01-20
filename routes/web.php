@@ -21,6 +21,9 @@ use Illuminate\Support\Facades\Route;
 //FrontEnd
 Route::get('/', 'FrontEnd\HomeController@index')->name('home');
 Route::get('/FasilitasDanLayanan', 'FrontEnd\FasilitasDanLayananController@index')->name('fasilitas');
+Route::get('/DaftarOnline', 'FrontEnd\DaftarOnlineController@index')->name('daftarOnline');
+Route::post('/registrasiOnline', 'FrontEnd\DaftarOnlineController@registrasi')->name('daftarOnline.registrasi');
+Route::post('/checkPasien', 'FrontEnd\DaftarOnlineController@check_pasien')->name('daftarOnline.checkPasien');
 
 
 //Main

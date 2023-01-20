@@ -124,6 +124,28 @@
             <button class="btn btn-success" onclick="checkData()">Daftar</button>
         </div>
     </div>
+
+    <div class="form_antrian" style="display: none">
+        <h3>Hai, Selamat Datang <span id="pasien_nama"></span></h3>
+        <div class="row antrian center">
+            <div class="col-6">
+              
+                <div class="antrian_box">
+                    <h2>Antrian Saat Ini</h2>
+                    <h4 class="no_antrian" id="no_saat_ini">-</h4>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="antrian_box">
+                    <h2>No Antrian Anda</h2>
+                    <h4 class="no_antrian" id="no_anda">4</h4>
+                    <div class="center">
+                        <button class="btn btn-success" onclick="checkData()">Daftar Antrian</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 @include('FrontEnd.Layouts.footer')

@@ -16,7 +16,8 @@
     }
 
     .card_box h3{
-        text-align: center
+        text-align: center;
+        color: var(--primary)
     }
 
     .card_box p{
@@ -50,8 +51,22 @@
     }
 
     .center .btn{
-        width: 20%;
+        width: 40%;
         border-radius: 20px;
         border: none;
+    }
+
+    .antrian{
+        margin: 5%
+    }
+
+    .no_antrian{
+        font-size: 8vw
+    }
+
+    .antrian_box{
+        padding: 10%;
+        border: 2px solid var(--primary);
+        border-radius: 20px;
     }
 </style>

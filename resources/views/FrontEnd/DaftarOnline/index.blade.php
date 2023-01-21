@@ -138,9 +138,10 @@
             <div class="col-6">
                 <div class="antrian_box">
                     <h2>No Antrian Anda</h2>
-                    <h4 class="no_antrian" id="no_anda">4</h4>
+                    <h4 class="no_antrian" id="no_anda">-</h4>
                     <div class="center">
-                        <button class="btn btn-success" onclick="checkData()">Daftar Antrian</button>
+                        <input type="hidden" id="id_pasien">
+                        <button class="btn btn-success" onclick="daftarAntrian()" id="btn_daftar_antrian">Daftar Antrian</button>
                     </div>
                 </div>
             </div>

@@ -80,11 +80,66 @@ class DaftarOnlineController extends BaseController
     public function check_pasien(Request $request){
         $find = DB::table('pasien')->where('nik',$request->id)->get();
         if(count($find) > 0){
+            $pasien_id = json_decode(json_encode($find), true)[0]['id'];
+            $find_no_antrian = DB::table('antrian')->where('pasien_id',$pasien_id)->where('created_at','LIKE',date('Y-m-d'). '%')->orderBy('no_antrian', 'desc')->first();
+            $antrian = json_decode(json_encode($find_no_antrian), true);
+
             $operation = array(
                 'success' => true,
                 'message' => 'Data Ditemukan',
-                'data' => $find[0]
+                'data' => $find[0],
+                'antrian' => $antrian['no_antrian']
             );
+        } else{
+            $operation = array(
+                'success' => false,
+                'message' => 'Anda Belum Terdaftar',
+            );
+        }
+        return $operation;
+    }
+
+    public function daftar_antrian(Request $request){
+        $find = DB::table('pasien')->where('id',$request->id)->get();
+        if(count($find) > 0){
+            $total_daftar = DB::table('antrian')->where('pasien_id',$request->id)->where('created_at','LIKE',date('Y-m-d'). '%')->count();
+            if($total_daftar < 3){
+                $check_antrian = DB::table('antrian')->select('created_at','no_antrian')->where('created_at','LIKE',date('Y-m-d'). '%')->orderBy('no_antrian', 'desc')->first();
+                $data = json_decode(json_encode($check_antrian), true);
+
+                if(empty($check_antrian)){
+                    $no_antrian = 1;
+                } else{
+                    $no_antrian = $data['no_antrian']+1;
+                }
+                
+                $insert = DB::table('antrian')->insert([
+                    'pasien_id' => $request->id,
+                    'created_at' => Carbon::now(),
+                    'status' => 0,
+                    'no_antrian' => $no_antrian,
+                ]);
+
+                if($insert){
+                    $operation = array(
+                        'success' => true,
+                        'message' => 'No Antrian Berhasil Dibuat',
+                        'data' => $insert,
+                        'antrian' => $no_antrian
+                    );
+                } else{
+                    $operation = array(
+                        'success' => false,
+                        'message' => 'No Antrian Gagal Dibuat',
+                    );
+                }
+
+            } else{
+                $operation = array(
+                    'success' => false,
+                    'message' => 'Anda Sudah Mendaftar Antrian 3x Hari ini',
+                );
+            }
         } else{
             $operation = array(
                 'success' => false,

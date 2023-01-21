@@ -67,13 +67,18 @@
                 },
                 type: 'POST',
                 success: function(response){
-                    console.log(response)
                     if(response.success == true){
+                        console.log(response)
                         swal("Success !", response.message, "success");
                         $('.form_pasien').hide()
                         $('#pasien_nama').html(response.data['nama'])
                         $('.form_antrian').show()
+                        $('#id_pasien').val(response.data['id'])
+                        $('#no_anda').html(response.antrian)
 
+                        if(response.antrian > 0){
+                            $('#btn_daftar_antrian').html('Ganti No Antrian')
+                        }
                     } else{
                         swal("Warning", response.message, "warning");
                     }
@@ -83,5 +88,29 @@
             swal("Warning", "Anda Belum Mengisi Field", "warning");
         }
         
+    }
+
+    function daftarAntrian(){
+        var id_pasien = $('#id_pasien').val();
+        
+        $.ajax({
+                url: "{{ route('daftarOnline.daftarAntrian') }}",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    id: id_pasien
+                },
+                type: 'POST',
+                success: function(response){
+                    if(response.success == true){
+                        swal("Success !", response.message, "success");
+                        $('#no_anda').html(response.antrian)
+                        if(response.antrian > 0){
+                            $('#btn_daftar_antrian').html('Ganti No Antrian')
+                        }
+                    } else{
+                        swal("Warning", response.message, "warning");
+                    }
+                }
+            })
     }
 </script>

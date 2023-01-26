@@ -36,7 +36,7 @@
 <div class="section layanan">
     <div class="row">
         <div class="title_content">
-            <h1 class="mb-3">Layanan Unggulan Kami</h1>
+            <h1 class="mb-3">Poli Yang Tersedia</h1>
         </div>
         <div class="col-12">
             <div class="row d-flex justify-content-center layanan_content">

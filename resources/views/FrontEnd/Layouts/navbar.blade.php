@@ -18,7 +18,7 @@
                     Tentang Kami
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Profil</a>
+                    <a class="dropdown-item" href="#">Profile</a>
                     <a class="dropdown-item" href="#">Pencapaian</a>
                     <a class="dropdown-item" href="#">Mitra</a>
                 </div>
@@ -28,36 +28,8 @@
                 <a class="nav-link" href="<?=URL::route('fasilitas');?>">Fasilitas Dan Layanan</a>
             </li>
 
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">     
-                    Layanan Unggulan
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </li>
-
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">     
-                    Klinik
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Profil</a>
-                    <a class="dropdown-item" href="#">Pencapaian</a>
-                    <a class="dropdown-item" href="#">Mitra</a>
-                </div>
-            </li>
-
             <li class="nav-item">
-                <a class="nav-link" href="#">Cari Dokter</a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="#">FAQS</a>
+                <a class="nav-link" href="<?=URL::route('tenagaMedis');?>">Tenaga Medis</a>
             </li>
 
             <li class="nav-item">

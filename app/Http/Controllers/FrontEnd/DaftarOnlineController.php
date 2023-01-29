@@ -81,14 +81,14 @@ class DaftarOnlineController extends BaseController
         $find = DB::table('pasien')->where('nik',$request->id)->get();
         if(count($find) > 0){
             $pasien_id = json_decode(json_encode($find), true)[0]['id'];
-            $find_no_antrian = DB::table('antrian')->where('pasien_id',$pasien_id)->where('created_at','LIKE',date('Y-m-d'). '%')->orderBy('no_antrian', 'desc')->first();
+            $find_no_antrian = DB::table('v_antrian')->where('pasien_id',$pasien_id)->where('created_at','LIKE',date('Y-m-d'). '%')->orderBy('created_at', 'desc')->first();
             $antrian = json_decode(json_encode($find_no_antrian), true);
 
             $operation = array(
                 'success' => true,
                 'message' => 'Data Ditemukan',
                 'data' => $find[0],
-                'antrian' => $antrian['no_antrian']
+                'antrian' => $antrian
             );
         } else{
             $operation = array(
@@ -102,10 +102,14 @@ class DaftarOnlineController extends BaseController
     public function daftar_antrian(Request $request){
         $find = DB::table('pasien')->where('id',$request->id)->get();
         if(count($find) > 0){
-            $total_daftar = DB::table('antrian')->where('pasien_id',$request->id)->where('created_at','LIKE',date('Y-m-d'). '%')->count();
+            $total_daftar = DB::table('v_antrian')->where('pasien_id',$request->id)->where('created_at','LIKE',date('Y-m-d'). '%')->where('poli_id',$request->poli_id)->count();
             if($total_daftar < 3){
-                $check_antrian = DB::table('antrian')->select('created_at','no_antrian')->where('created_at','LIKE',date('Y-m-d'). '%')->orderBy('no_antrian', 'desc')->first();
+                $check_antrian = DB::table('v_antrian')->select('created_at','no_antrian','poli_id')->where('created_at','LIKE',date('Y-m-d'). '%')->where('poli_id',$request->poli_id)->orderBy('no_antrian', 'desc')->first();
                 $data = json_decode(json_encode($check_antrian), true);
+
+                $update_poli = DB::table('antrian')->where('pasien_id',$request->id)->update([
+                    'status' => 4,
+                ]);
 
                 if(empty($check_antrian)){
                     $no_antrian = 1;
@@ -118,14 +122,18 @@ class DaftarOnlineController extends BaseController
                     'created_at' => Carbon::now(),
                     'status' => 0,
                     'no_antrian' => $no_antrian,
+                    'poli_id' => $request->poli_id
                 ]);
 
                 if($insert){
+                    $check_poli = DB::table('poli')->where('id',$request->poli_id)->first();
+                    $poli = json_decode(json_encode($check_poli), true)['kode'];
+            
                     $operation = array(
                         'success' => true,
                         'message' => 'No Antrian Berhasil Dibuat',
                         'data' => $insert,
-                        'antrian' => $no_antrian
+                        'antrian' => $no_antrian.$poli
                     );
                 } else{
                     $operation = array(
@@ -147,5 +155,25 @@ class DaftarOnlineController extends BaseController
             );
         }
         return $operation;
+    }
+
+    public function antrian_saat_ini(){
+        $get_poli = DB::table('poli')->where('status','1')->get();
+        $data = json_decode(json_encode($get_poli), true);
+
+        $operation =[];
+        if(isset($data)){
+            foreach($data as $val){
+                $get_antrian = DB::table('antrian')->where('status','0')->where('poli_id', $val['id'])->orderBy('created_at', 'asc')->first();
+                $data_antrian = json_decode(json_encode($get_antrian), true);
+
+                if(isset($data_antrian)){
+                    $operation[$val['nama']] = $data_antrian['no_antrian'].$val['kode'];
+                }
+            }
+        }
+
+        return $operation;
+
     }
 }

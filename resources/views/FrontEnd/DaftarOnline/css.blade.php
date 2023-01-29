@@ -39,15 +39,20 @@
     
     }
 
-    .check_nik{
-        margin: 8% auto 1%;
+    .check_nik,.check_poli{
+        margin: 1% auto 1%;
         border-radius: 20px;
         border: 1px solid var(--primary);
         width: 60%
     }
 
+    .check_poli{
+        margin-top: 0
+    }
+
     .center{
         text-align: center;
+        margin: 0 auto
     }
 
     .center .btn{
@@ -60,13 +65,38 @@
         margin: 5%
     }
 
-    .no_antrian{
-        font-size: 8vw
-    }
+    
 
     .antrian_box{
         padding: 10%;
         border: 2px solid var(--primary);
         border-radius: 20px;
+    }
+
+    .informasi_pasien{
+        margin: 3vw;
+        display: flex;
+        gap: 1vw;
+    }
+
+    .data_pribadi{
+        padding: 1vw;
+        /* background: red; */
+        width: 40%;
+        border: 2px solid var(--primary);
+        border-radius: 20px;
+    }
+
+    .no_antrian_pasien{
+        padding: 1vw;
+        /* background: blue; */
+        width: 60%;
+        text-align: center;
+        border: 2px solid var(--primary);
+        border-radius: 20px;
+    }
+    
+    .no_antrian{
+        font-size: 8vw
     }
 </style>

@@ -25,6 +25,7 @@ Route::get('/DaftarOnline', 'FrontEnd\DaftarOnlineController@index')->name('daft
 Route::post('/registrasiOnline', 'FrontEnd\DaftarOnlineController@registrasi')->name('daftarOnline.registrasi');
 Route::post('/checkPasien', 'FrontEnd\DaftarOnlineController@check_pasien')->name('daftarOnline.checkPasien');
 Route::post('/daftarAntrian', 'FrontEnd\DaftarOnlineController@daftar_antrian')->name('daftarOnline.daftarAntrian');
+Route::get('/antrianSaatIni', 'FrontEnd\DaftarOnlineController@antrian_saat_ini')->name('daftarOnline.antrianSaatIni');
 
 
 //Main
@@ -134,6 +135,11 @@ Route::delete('/users/delete/{id}', 'UserController@hapus')->name('user.destroy'
 Route::group(['prefix'=>'agama','as'=>'agama.'], function()
 {
   Route::get('/select', ['as' => 'select', 'uses' => 'AgamaController@select']);
+});
+
+Route::group(['prefix'=>'poli','as'=>'poli.'], function()
+{
+  Route::get('/select', ['as' => 'select', 'uses' => 'PoliController@select']);
 });
 
 Route::group(['prefix'=>'pasien','as'=>'pasien','middleware' => ['auth']], function()

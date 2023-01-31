@@ -1,11 +1,7 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-{{-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script> --}}
-    
 <script>
     getAgama()
-    // $('#example').DataTable();
+    getPoli()
+    getAntrianSaatIni()
 
     function getAgama(){
         $.ajax({
@@ -15,6 +11,29 @@
                 response.forEach(v => {
                     $('#Agama').append(`<option value="${v.id}">${v.nama}</option>`)
                 });
+            }
+        })
+    }
+
+    function getPoli(){
+        $.ajax({
+            url: "{{ route('poli.select') }}",
+            success: function(response){
+                $('#poli_id').empty().append(`<option value="" disabled selected>Pilih Poli</option>`)
+                response.forEach(v => {
+                    $('#poli_id').append(`<option value="${v.id}">${v.nama}</option>`)
+                });
+            }
+        })
+    }
+
+    function getAntrianSaatIni(){
+        $.ajax({
+            url: "{{ route('daftarOnline.antrianSaatIni') }}",
+            success: function(response){
+                $('.poli_gigi').html(response['Poli Gigi'])
+                $('.poli_umum').html(response['Poli Umum'])
+
             }
         })
     }
@@ -68,15 +87,23 @@
                 type: 'POST',
                 success: function(response){
                     if(response.success == true){
-                        console.log(response)
+                        var data = response.data
+                        var antrian = response.antrian
+                        
+                        $.each(data, function(index, value) {
+                            $('.pasien_'+index).html(value)
+                        });
+
                         swal("Success !", response.message, "success");
                         $('.form_pasien').hide()
-                        $('#pasien_nama').html(response.data['nama'])
                         $('.form_antrian').show()
                         $('#id_pasien').val(response.data['id'])
-                        $('#no_anda').html(response.antrian)
 
-                        if(response.antrian > 0){
+                        if(antrian != null){
+                            $('#no_anda').html(antrian.no_antrian+antrian.poli_kode)
+                        }
+
+                        if(antrian > 0){
                             $('#btn_daftar_antrian').html('Ganti No Antrian')
                         }
                     } else{
@@ -90,14 +117,21 @@
         
     }
 
+    function onSelectPoli(){
+        $('#exampleModalCenter').modal('show');
+    }
+
     function daftarAntrian(){
         var id_pasien = $('#id_pasien').val();
+        var poli_id = $('#poli_id').val();
         
-        $.ajax({
+        if(poli_id != null){
+            $.ajax({
                 url: "{{ route('daftarOnline.daftarAntrian') }}",
                 data: {
                     _token: "{{ csrf_token() }}",
-                    id: id_pasien
+                    id: id_pasien,
+                    poli_id: poli_id
                 },
                 type: 'POST',
                 success: function(response){
@@ -112,5 +146,9 @@
                     }
                 }
             })
+        } else{
+            swal("Warning", "Pilih Poli Terlebih Dahulu", "warning");
+        }
+        
     }
 </script>

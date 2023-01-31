@@ -8,7 +8,29 @@
 @include('FrontEnd.Layouts.navbar')
 
 <div class="card_box">
-    <div class="front_page">
+    <h3>Antrian Saat Ini</h3>
+
+    <div class="row antrian center">
+            <div class="col-4">
+                <div class="antrian_box">
+                    <h2>Poli Gigi</h2>
+                    <h4 class="no_antrian poli_gigi" id="no_saat_ini">0</h4>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="antrian_box">
+                    <h2>Poli Umum</h2>
+                    <h4 class="no_antrian poli_umum" id="no_saat_ini">0</h4>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="antrian_box">
+                    <h2>Poli lorem</h2>
+                    <h4 class="no_antrian" id="no_saat_ini">0</h4>
+                </div>
+            </div>
+    </div>
+    <div class="front_page" style="display:block">
         <h3>Pendaftaran Pasien</h3>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore possimus sunt quisquam! Obcaecati, nobis?
             Incidunt animi impedit maiores molestias voluptates unde voluptatum iusto accusamus! At, maiores illo autem
@@ -126,22 +148,49 @@
     </div>
 
     <div class="form_antrian" style="display: none">
-        <h3>Hai, Selamat Datang <span id="pasien_nama"></span></h3>
-        <div class="row antrian center">
-            <div class="col-6">
-              
-                <div class="antrian_box">
-                    <h2>Antrian Saat Ini</h2>
-                    <h4 class="no_antrian" id="no_saat_ini">-</h4>
-                </div>
+        <h3>Hai, Selamat Datang <span class="pasien_nama"></span></h3>
+        <div class="informasi_pasien">
+            <div class="data_pribadi">
+                <table>
+                    <tr>
+                        <td>Nama</td>
+                        <td>: <span class="pasien_nama">Nama Lengkap</span></td>
+                    </tr>
+                    <tr>
+                        <td>Nama</td>
+                        <td>: <span class="pasien_nik">NIK</span></td>
+                    </tr>
+                    <tr>
+                        <td>Alamat</td>
+                        <td>: <span class="pasien_alamat_ktp">Alamat Lengkap</span></td>
+                    </tr>
+                    <tr>
+                        <td>No Telpon</td>
+                        <td>: <span class="pasien_hp">No Telpon</span></td>
+                    </tr>
+                    <tr>
+                        <td>No BPJS</td>
+                        <td>: <span class="pasien_no_bpjs">BPJS</span></td>
+                    </tr>
+                    <tr>
+                        <td>Tanggal Lahir</td>
+                        <td>: <span class="pasien_tgl_lhr">Tanggal Lahir</span></td>
+                    </tr>
+                </table>
             </div>
-            <div class="col-6">
-                <div class="antrian_box">
-                    <h2>No Antrian Anda</h2>
-                    <h4 class="no_antrian" id="no_anda">-</h4>
-                    <div class="center">
-                        <input type="hidden" id="id_pasien">
-                        <button class="btn btn-success" onclick="daftarAntrian()" id="btn_daftar_antrian">Daftar Antrian</button>
+            <div class="no_antrian_pasien">
+                <h2>No Antrian Anda</h2>
+                <h4 class="no_antrian" id="no_anda">0</h4>
+                <div class="daftar_antrian">
+                    <div class="row">
+                        <div class="col-8">
+                            <input type="hidden" id="id_pasien">
+                            <select class="form-control" name="poli_id" id="poli_id"></select>
+                        </div>
+                        <div class="col-4">
+                            <button class="btn btn-success" onclick="daftarAntrian()" id="btn_daftar_antrian" style="width: 100%">Daftar
+                                Antrian</button>
+                        </div>
                     </div>
                 </div>
             </div>

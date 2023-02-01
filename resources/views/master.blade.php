@@ -24,6 +24,8 @@
     
   <script src="{{ URL::asset('js/fontawesome-iconpicker.js') }}"></script>
   <link href= "{{ URL::asset('css/fontawesome-iconpicker.min.css') }}" rel="stylesheet" type="text/css">
+
+  
 </head>
 <body id="page-top">
 
@@ -53,6 +55,20 @@
         <a class="nav-link" href="{{route('dashboard')}}">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <div class="sidebar-heading">
+        Menu Master Data
+      </div>
+      <!-- Nav Item - Pasien Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link {{ set_menu('poli') }}" href="{{ route('poli') }}">
+          <i class="fas fa-fw fa-portrait"></i>
+          <span>Master Poli</span>
+        </a>
       </li>
 
       <!-- Divider -->
@@ -399,7 +415,7 @@
   </div>
 
 
-
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <!-- Custom scripts for all pages-->
   <script src="{{ URL::asset('js/sb-admin-2.min.js') }}"></script>
 

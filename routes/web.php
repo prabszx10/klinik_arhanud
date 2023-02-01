@@ -32,20 +32,6 @@ Route::get('/antrianSaatIni', 'FrontEnd\DaftarOnlineController@antrian_saat_ini'
 //Main
 Route::get('/dashboard', 'MainController@index')->name('dashboard')->middleware('auth');
 
-//Pasien
-// Route::get('/pasien', 'PasienController@index')->name('pasien')->middleware('auth');
-
-// Route::get('/pasien/tambah/', 'PasienController@tambah_pasien')->name('pasien.tambah')->middleware('auth');
-
-// Route::post('/pasien/tambah/simpan', 'PasienController@simpan_pasien')->name('pasien.simpan')->middleware('auth');
-
-// Route::post('/pasien/edit/update/', 'PasienController@update_pasien')->middleware('auth');
-
-// Route::delete('/pasien/hapus/{id}','PasienController@hapus_pasien')->name('pasien.destroy')->middleware('auth');
-
-// Route::get('/pasien/edit/{id}','PasienController@edit_pasien')->name('pasien.edit')->middleware('auth');
-//End Pasien
-
 //Obat
 
 Route::get('/obat', 'ObatController@index')->name('obat')->middleware('auth');
@@ -140,17 +126,28 @@ Route::group(['prefix'=>'agama','as'=>'agama.'], function()
 
 Route::group(['prefix'=>'poli','as'=>'poli.'], function()
 {
-  Route::get('/select', ['as' => 'select', 'uses' => 'PoliController@select']);
-});
-
-Route::group(['prefix'=>'pasien','as'=>'pasien','middleware' => ['auth']], function()
-{
-  Route::get('/', ['uses' => 'PasienController@index']);
-  Route::get('/tambah', ['as' => '.tambah', 'uses' => 'PasienController@tambah_pasien']);
-  Route::post('/tambah/simpan', ['as' => '.simpan', 'uses' => 'PasienController@simpan_pasien']);
-  Route::get('/edit/update', ['as' => '.update', 'uses' => 'PasienController@update_pasien']);
-  Route::get('/edit/{id}', ['as' => '.edit', 'uses' => 'PasienController@edit_pasien']);
-  Route::delete('/hapus/{id}', ['as' => '.destroy', 'uses' => 'PasienController@hapus_pasien']);
+  Route::get('/select', ['as' => 'select', 'uses' => 'BackEnd\PoliController@select']);
 });
 
 
+
+Route::group(['middleware' => ['auth']], function () {
+  Route::group(['prefix'=>'pasien','as'=>'pasien'], function()
+  {
+    Route::get('/', ['uses' => 'PasienController@index']);
+    Route::get('/tambah', ['as' => '.tambah', 'uses' => 'PasienController@tambah_pasien']);
+    Route::post('/tambah/simpan', ['as' => '.simpan', 'uses' => 'PasienController@simpan_pasien']);
+    Route::get('/edit/update', ['as' => '.update', 'uses' => 'PasienController@update_pasien']);
+    Route::get('/edit/{id}', ['as' => '.edit', 'uses' => 'PasienController@edit_pasien']);
+    Route::delete('/hapus/{id}', ['as' => '.destroy', 'uses' => 'PasienController@hapus_pasien']);
+  });
+
+  Route::group(['prefix'=>'poli','as'=>'poli'], function()
+  {
+    Route::get('/', ['uses' => 'BackEnd\PoliController@index']);
+    Route::post('/insert_update', ['as' => '.insert_update','uses' => 'BackEnd\PoliController@insert_update']);
+    Route::post('/delete', ['as' => '.delete','uses' => 'BackEnd\PoliController@delete']);
+    Route::get('/show', ['as' => '.show', 'uses' => 'BackEnd\PoliController@show']);
+
+  });
+});

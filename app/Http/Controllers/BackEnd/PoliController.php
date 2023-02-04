@@ -5,7 +5,8 @@ namespace App\Http\Controllers\BackEnd;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Poli;
-use Illuminate\Routing\Controller as BaseController;
+// use Illuminate\Routing\Controller as BaseController;
+use App\Core\BaseController as BaseController;
 
 class PoliController extends BaseController
 {
@@ -17,68 +18,34 @@ class PoliController extends BaseController
 
     public function select(Request $request){
         if(isset($request->id)){
-            $data = Poli::where('id',$request->id)->first();
+            $operation = $operation = $this->read('poli',['id'=>$request->id,'deleted'=>'0']);
         } else{
-            $data = Poli::where('deleted',0)->get();
+            $operation = Poli::where('deleted',0)->get();
         }
-        return $data;
+        return $operation;
     }
 
     public function insert_update(Request $request){
+        $data['nama'] = $request->nama_poli;
+        $data['keterangan'] = $request->keterangan_poli;
+        $data['status'] = $request->status_poli;
+        $data['kode'] = $request->kode_poli;
+        $data['deleted'] = 0;
+
         if(isset($request->id_poli)){
-            $info = 'Diupdate';
-            $data = DB::table('poli')->where('id',$request->id_poli)->update([
-                'nama' => $request->nama_poli,
-                'keterangan' => $request->keterangan_poli,
-                'status' => $request->status_poli,
-                'kode' => $request->kode_poli,
-            ]);
+            $operation = $this->update('poli',$request->id_poli,$data);
         } else{
-            $info = 'Disimpan';
-            $data = DB::table('poli')->insert([
-                'nama' => $request->nama_poli,
-                'keterangan' => $request->keterangan_poli,
-                'status' => $request->status_poli,
-                'kode' => $request->kode_poli,
-                'deleted'=>0
-            ]);
-        }
-        
-        if($data){
-            $operation = array(
-                'success' => true,
-                'message' => 'Data Berhasil '.$info,
-                'data' => $request->all()
-            );
-        } else{
-            $operation = array(
-                'success' => "error",
-                'message' => 'Data Gagal '.$info,
-            );
+            $operation = $this->insert('poli',$data);
         }
 
         return $operation;
-
     }
 
     public function delete(Request $request){
-        $data = DB::table('poli')->where('id',$request->id)->update([
-            'deleted' => 1,
-            'status' => 0,
-        ]);
-
-        if($data){
-            $operation = array(
-                'success' => true,
-                'message' => 'Data Berhasil Dihapus',
-                'data' => $request->all()
-            );
-        } else{
-            $operation = array(
-                'success' => "error",
-                'message' => 'Data Gagal Dihapus',
-            );
-        }
+        $data['deleted'] = 1;
+        $data['status'] = 0;
+        $data['message'] = 'dihapus';
+        $operation = $this->update('poli',$request->id,$data);
 
         return $operation;
     }

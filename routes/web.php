@@ -27,6 +27,7 @@ Route::post('/registrasiOnline', 'FrontEnd\DaftarOnlineController@registrasi')->
 Route::post('/checkPasien', 'FrontEnd\DaftarOnlineController@check_pasien')->name('daftarOnline.checkPasien');
 Route::post('/daftarAntrian', 'FrontEnd\DaftarOnlineController@daftar_antrian')->name('daftarOnline.daftarAntrian');
 Route::get('/antrianSaatIni', 'FrontEnd\DaftarOnlineController@antrian_saat_ini')->name('daftarOnline.antrianSaatIni');
+Route::get('/checkDB', 'FrontEnd\DaftarOnlineController@check_db')->name('daftarOnline.checkDB');
 
 
 //Main
@@ -121,7 +122,7 @@ Route::delete('/users/delete/{id}', 'UserController@hapus')->name('user.destroy'
 
 Route::group(['prefix'=>'agama','as'=>'agama.'], function()
 {
-  Route::get('/select', ['as' => 'select', 'uses' => 'AgamaController@select']);
+  Route::get('/select', ['as' => 'select', 'uses' => 'BackEnd\AgamaController@select']);
 });
 
 Route::group(['prefix'=>'poli','as'=>'poli.'], function()
@@ -129,25 +130,45 @@ Route::group(['prefix'=>'poli','as'=>'poli.'], function()
   Route::get('/select', ['as' => 'select', 'uses' => 'BackEnd\PoliController@select']);
 });
 
+Route::group(['prefix'=>'','as'=>'select.'], function()
+{
+  Route::get('/selectPasien', ['as' => 'pasien', 'uses' => 'BackEnd\PasienController@select']);
+  Route::get('/selectAntrian', ['as' => 'antrian', 'uses' => 'BackEnd\AntrianController@select']);
+});
 
 
 Route::group(['middleware' => ['auth']], function () {
-  Route::group(['prefix'=>'pasien','as'=>'pasien'], function()
-  {
-    Route::get('/', ['uses' => 'PasienController@index']);
-    Route::get('/tambah', ['as' => '.tambah', 'uses' => 'PasienController@tambah_pasien']);
-    Route::post('/tambah/simpan', ['as' => '.simpan', 'uses' => 'PasienController@simpan_pasien']);
-    Route::get('/edit/update', ['as' => '.update', 'uses' => 'PasienController@update_pasien']);
-    Route::get('/edit/{id}', ['as' => '.edit', 'uses' => 'PasienController@edit_pasien']);
-    Route::delete('/hapus/{id}', ['as' => '.destroy', 'uses' => 'PasienController@hapus_pasien']);
-  });
-
   Route::group(['prefix'=>'poli','as'=>'poli'], function()
   {
     Route::get('/', ['uses' => 'BackEnd\PoliController@index']);
     Route::post('/insert_update', ['as' => '.insert_update','uses' => 'BackEnd\PoliController@insert_update']);
     Route::post('/delete', ['as' => '.delete','uses' => 'BackEnd\PoliController@delete']);
     Route::get('/show', ['as' => '.show', 'uses' => 'BackEnd\PoliController@show']);
+  });
 
+  Route::group(['prefix'=>'agama','as'=>'agama'], function()
+  {
+    Route::get('/', ['uses' => 'BackEnd\AgamaController@index']);
+    Route::post('/insert_update', ['as' => '.insert_update','uses' => 'BackEnd\AgamaController@insert_update']);
+    Route::post('/delete', ['as' => '.delete','uses' => 'BackEnd\AgamaController@delete']);
+    Route::get('/show', ['as' => '.show', 'uses' => 'BackEnd\AgamaController@show']);
+  });
+
+  Route::group(['prefix'=>'pasien','as'=>'pasien'], function()
+  {
+    Route::get('/', ['uses' => 'BackEnd\PasienController@index']);
+    Route::post('/insert_update', ['as' => '.insert_update','uses' => 'BackEnd\PasienController@insert_update']);
+    Route::post('/delete', ['as' => '.delete','uses' => 'BackEnd\PasienController@delete']);
+    Route::get('/show', ['as' => '.show', 'uses' => 'BackEnd\PasienController@show']);
+  });
+
+  Route::group(['prefix'=>'antrian','as'=>'antrian'], function()
+  {
+    Route::get('/', ['uses' => 'BackEnd\AntrianController@index']);
+    Route::post('/insert_update', ['as' => '.insert_update','uses' => 'BackEnd\AntrianController@insert_update']);
+    Route::post('/delete', ['as' => '.delete','uses' => 'BackEnd\Antrianontroller@delete']);
+    Route::get('/show', ['as' => '.show', 'uses' => 'BackEnd\AntrianController@show']);
+    Route::get('/onAntrian', ['as' => '.onAntrian', 'uses' => 'BackEnd\AntrianController@onAntrian']);
+    Route::get('/onDetail', ['as' => '.onDetail', 'uses' => 'BackEnd\AntrianController@onDetail']);
   });
 });

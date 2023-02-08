@@ -2,12 +2,13 @@
 
 <script type="text/javascript">
     var urlPath ={
-        insert_update: "{{ route('poli.insert_update') }}",
-        select: "{{ route('poli.select') }}",
-        delete: "{{ route('poli.delete') }}",
+        insert_update: "{{ route('pasien.insert_update') }}",
+        delete: "{{ route('pasien.delete') }}",
+        select: "{{ route('select.pasien') }}",
     }
 
     getData()
+    getAgama()
 
     function getData(){
         $.ajax({
@@ -22,9 +23,12 @@
 
                         $('#tableData').append(`
                             <tr>
+                                <td>${value.rm_id==null? '-':value.rm_id}</td>
                                 <td>${value.nama}</td>
-                                <td>${value.keterangan==null? '-':value.keterangan}</td>
-                                <td><span class="label ${label}">${status}</span></td>
+                                <td>${getAge(value.tgl_lhr)}</td>
+                                <td>${value.jk}</td>
+                                <td>${value.alamat}</td>
+                                <td>${value.hp}</td>
                                 <td>
                                     <a href ="javascript:onAdd('${value.id}')" class="btn btn-sm btn-icon-split btn-warning">
                                         <span class="icon"><i class="fa fa-pen" style="padding-top: 4px;"></i></span><span class="text">Edit</span>
@@ -39,6 +43,29 @@
                 }
             }
         })
+    }
+
+    function getAgama(){
+        $.ajax({
+            url: "{{ route('agama.select') }}",
+            success: function(response){
+                $('#agama_id_pasien').empty().append(`<option value="" disabled selected>Agama</option>`)
+                response.forEach(v => {
+                    $('#agama_id_pasien').append(`<option value="${v.id}">${v.nama}</option>`)
+                });
+            }
+        })
+    }
+
+    function getAge(dateString) {
+        var today = new Date();
+        var birthDate = new Date(dateString);
+        var age = today.getFullYear() - birthDate.getFullYear();
+        var m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        return age+' tahun '+m+' bulan';
     }
 
     function onAdd(id){
@@ -64,7 +91,7 @@
             },
             success: function(response){
                 $.each( response, function( key, value ) {
-                    $("#"+key+"_poli").val(value);
+                    $("#"+key+"_pasien").val(value);
                 })
             }
         })

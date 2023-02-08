@@ -18,7 +18,7 @@ class PoliController extends BaseController
 
     public function select(Request $request){
         if(isset($request->id)){
-            $operation = $operation = $this->read('poli',['id'=>$request->id,'deleted'=>'0']);
+            $operation = Poli::where('id',$request->id)->first();
         } else{
             $operation = Poli::where('deleted',0)->get();
         }

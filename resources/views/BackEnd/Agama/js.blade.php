@@ -2,9 +2,9 @@
 
 <script type="text/javascript">
     var urlPath ={
-        insert_update: "{{ route('poli.insert_update') }}",
-        select: "{{ route('poli.select') }}",
-        delete: "{{ route('poli.delete') }}",
+        insert_update: "{{ route('agama.insert_update') }}",
+        select: "{{ route('agama.select') }}",
+        delete: "{{ route('agama.delete') }}",
     }
 
     getData()
@@ -64,7 +64,7 @@
             },
             success: function(response){
                 $.each( response, function( key, value ) {
-                    $("#"+key+"_poli").val(value);
+                    $("#"+key+"_agama").val(value);
                 })
             }
         })

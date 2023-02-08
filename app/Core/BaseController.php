@@ -8,11 +8,21 @@ use App\Http\Controllers\Controller;
 
 class BaseController extends Controller
 {
-    // public function select($table,$data){
+    public function varPost($data){
+        foreach($data as $key=>$val){
+            if($key != '_token'){
+                $explode = explode('_',$key);
+                array_pop($explode);
+                $k = implode('_',$explode); 
+                $operation[$k] = $val;
+            }
+        }
 
-    // }
+        return $operation;
+    }
 
     public function read($table,$data){
+        
         $operation = DB::table($table)->whereColumn($data)->first();
         return $operation;
     }

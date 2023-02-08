@@ -71,26 +71,33 @@
         </a>
       </li>
 
+      <li class="nav-item">
+        <a class="nav-link {{ set_menu('agama') }}" href="{{ route('agama') }}">
+          <i class="fas fa-fw fa-portrait"></i>
+          <span>Master Agama</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link {{ set_menu('pasien') }}" href="{{ route('pasien') }}">
+          <i class="fas fa-fw fa-portrait"></i>
+          <span>Master Pasien</span>
+        </a>
+      </li>
+
       <!-- Divider -->
       <hr class="sidebar-divider">
 
       <div class="sidebar-heading">
         Menu Utama
       </div>
-      <!-- Nav Item - Pasien Collapse Menu -->
-      <li class="nav-item {{ set_menu(['pasien', 'pasien.tambah', 'pasien.edit']) }}">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-fw fa-portrait"></i>
-          <span>Pasien</span>
-        </a>
-        <div id="collapseTwo" class="collapse {{ set_show(['pasien', 'pasien.tambah', 'pasien.edit']) }}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">            
-            <a class="collapse-item {{ set_menu('pasien') }}" href="{{ route('pasien') }}">Daftar Pasien</a>
-            <a class="collapse-item {{ set_menu('pasien.tambah') }}" href="{{ route('pasien.tambah') }}">Tambah Pasien</a>
-          </div>
-        </div>
-      </li>
 
+      <li class="nav-item">
+        <a class="nav-link {{ set_menu('antrian') }}" href="{{ route('antrian') }}">
+          <i class="fas fa-fw fa-portrait"></i>
+          <span>Antrian Pasien</span>
+        </a>
+      </li>
       <!-- Nav Item - Lab Collapse Menu -->
       <li class="nav-item {{ set_menu(['lab', 'lab.tambah', 'lab.edit']) }}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseTwo">
@@ -156,7 +163,7 @@
             <a class="collapse-item {{ set_menu(['profile.edit']) }}" href="{{route('profile.edit')}}">Edit Profile</a>
           </div>
         </div>
-      </li>
+      </li>f
 
       <!-- Nav Item - Charts -->
       <li class="nav-item {{ set_menu(['pengaturan']) }}">

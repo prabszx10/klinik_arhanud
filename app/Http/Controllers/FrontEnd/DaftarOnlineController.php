@@ -169,11 +169,32 @@ class DaftarOnlineController extends BaseController
 
                 if(isset($data_antrian)){
                     $operation[$val['nama']] = $data_antrian['no_antrian'].$val['kode'];
+                    $operation['id_'.$val['nama']] = $data_antrian['id'];
                 }
             }
         }
 
         return $operation;
 
+    }
+
+    public function check_db(Request $request){
+        $last = $request->all();
+
+        if($last['update_at']!=''){
+            $last_change = $last['update_at'];
+        } else{
+            //Dapatkan tanggal terakhir perubahan
+            $last_change = DB::table('antrian')->max('updated_at');   
+        }
+
+        //Periksa apakah ada perubahan baru
+        $count = DB::table('antrian')->where('updated_at', '>', $last_change)->count();
+        //Kirim respons
+        if ($count > 0) {
+            return response()->json(['status' => 'new_data_available','update_at'=>'']);
+        } else {
+            return response()->json(['status' => 'no_changes','update_at'=>$last_change]);
+        }
     }
 }

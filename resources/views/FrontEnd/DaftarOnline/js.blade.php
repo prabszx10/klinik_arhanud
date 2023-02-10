@@ -151,4 +151,21 @@
         }
         
     }
+
+    var last = '';
+    setInterval(function() {
+        $.ajax({
+            url: "{{ route('daftarOnline.checkDB') }}",
+            data: {
+                update_at: last,
+            },
+            success: function(data) {
+                if (data.status == "new_data_available") {
+                    getAntrianSaatIni()
+                } 
+
+                last =data.update_at
+            }
+        });
+    }, 5000);
 </script>

@@ -67,4 +67,22 @@ class BaseController extends Controller
  
          return $operation;
     }
+
+    public function destroy($table,$id){
+        $delete = DB::table($table)->where('id',$id)->delete();
+
+        if($delete){
+             $operation = array(
+                 'success' => true,
+                 'message' => 'Data Berhasil dihapus',
+             );
+         } else{
+             $operation = array(
+                 'success' => false,
+                 'message' => 'Data Gagal dihapus',
+             );
+         }
+ 
+         return $operation;
+    }
 }

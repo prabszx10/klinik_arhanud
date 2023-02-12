@@ -1,4 +1,6 @@
 <script>
+        $('.isactive').removeClass( "isactive" );
+    $('#daftarOnline').addClass( "isactive" );
     getAgama()
     getPoli()
     getAntrianSaatIni()

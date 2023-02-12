@@ -1,4 +1,8 @@
 <style>
+    :root {
+    --primary:  #1AB1E5;
+}
+
     .section_spacer{
         width: 100%;
         text-align: center;

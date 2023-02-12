@@ -8,35 +8,23 @@
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav mr-0 mt-2 mt-lg-0">
-            <li class="nav-item isactive">
+            <li class="nav-item isactive" id="beranda">
                 <a class="nav-link" href="<?=URL::route('home');?>">Beranda <span class="sr-only">(current)</span></a>
             </li>
 
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">     
-                    Tentang Kami
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Profile</a>
-                    <a class="dropdown-item" href="#">Pencapaian</a>
-                    <a class="dropdown-item" href="#">Mitra</a>
-                </div>
+            <li class="nav-item" id="tentangKami">
+                <a class="nav-link" href="<?=URL::route('tentangKami');?>">Tentang Kami</a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="<?=URL::route('fasilitas');?>">Fasilitas Dan Layanan</a>
-            </li>
-
-            <li class="nav-item">
+            <li class="nav-item" id="tenagaMedis">
                 <a class="nav-link" href="<?=URL::route('tenagaMedis');?>">Tenaga Medis</a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="#">Kegiatan dan Berita</a>
+            <li class="nav-item" id="kegiatanBerita">
+                <a class="nav-link" href="<?=URL::route('kegiatanDanBerita');?>">Kegiatan dan Berita</a>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item" id="daftarOnline">
                 <a class="nav-link" href="<?=URL::route('daftarOnline');?>">Daftar Online</a>
             </li>
         </ul>

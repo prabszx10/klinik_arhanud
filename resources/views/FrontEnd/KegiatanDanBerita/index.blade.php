@@ -1,7 +1,7 @@
 @extends('FrontEnd.master')
 
 @section('style')
-@include('FrontEnd.FasilitasDanLayanan.css')
+@include('FrontEnd.KegiatanDanBerita.css')
 @endsection
 
 @section('content')
@@ -181,5 +181,5 @@
 @endsection
 
 @section('javascript')
-@include('FrontEnd.FasilitasDanLayanan.js')
+@include('FrontEnd.KegiatanDanBerita.js')
 @endsection

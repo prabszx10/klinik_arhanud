@@ -4,6 +4,6 @@
         <div class="footer_detail">Detail 2</div>
     </div>
     <div class="footnote">
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa, obcaecati! Alias, voluptate.</p>
+        <p>© Klinik Arhanud Kota Batu 2022</p>
     </div>
 </div>

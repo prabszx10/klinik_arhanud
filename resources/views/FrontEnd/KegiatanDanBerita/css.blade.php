@@ -1,6 +1,6 @@
 <style>
     :root {
-    --primary: rgb(0, 136, 255);
+    --primary:  #1AB1E5;
 }
 
     .button_choose{

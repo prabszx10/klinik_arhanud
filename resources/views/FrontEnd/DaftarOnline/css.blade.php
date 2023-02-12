@@ -1,7 +1,7 @@
 <style>
 
     :root {
-        --primary: rgb(0, 136, 255);
+        --primary:  #1AB1E5;
         --primaryOpacity: rgb(0, 136, 255, 0.2);
     }
 

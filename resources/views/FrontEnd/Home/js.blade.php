@@ -1,81 +1,178 @@
 <script>
-    getData()
+    $('.isactive').removeClass( "isactive" );
+    $('#beranda').addClass( "isactive" );
 
+
+    var urlPath ={
+        carousel: "{{ route('select.carousel') }}",
+        poli: "{{ route('select.poli') }}",
+        fasilitas: "{{ route('select.fasilitas') }}",
+    }
+
+    getData()
     
     function getData(){
-        getLayanan()
+        getCarousel()
+        getPoli()
         getFasilitas()
         getBerita()
     }
 
-    function getLayanan(){
-        for(let i =0; i<5;i++){            
-            $(".layanan_content").append(`
-                <div class="col-4 item_content">
-                    <img src="{{ asset('img/hospital_icon.png') }}" alt="" class="item_content_icon">
-                    <h4>Laboratorium Klinik</h4>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum iure alias obcaecati tempore sit. Blanditiis quibusdam repellat nobis velit deleniti.
-                </div>     
-            `)
-        }
+    function getCarousel(){
+        $.ajax({
+            url: urlPath.carousel,
+            success: function(response){
+                 if(response.length >0){
+                     $.each( response, function( key, value ) {
+                         var status = key == 0? 'active':''
+                         var url = window.location.origin+'/storage/images/carousel/'+value.file;
+
+                         $('#list_carousel').append(`
+                         <div class="carousel-item ${status} slider_home">
+                             <img class="d-block w-100" src="${url}"
+                                 alt="First slide">
+                         </div>
+                         `)
+                     });
+                 } else{
+                     $('#list_carousel').append(`
+                         <div class="carousel-item active slider_home">
+                             <img class="d-block w-100" src="{{ asset('img/home_rumah_sakit.jpg') }}"
+                                 alt="First slide">
+                         </div>
+                         <div class="carousel-item slider_home">
+                             <img class="d-block w-100" src="{{ asset('img/fasilitas.jpeg') }}"
+                                 alt="Second slide">
+                         </div>
+                     `)
+                 }
+            }
+        })
+    }
+
+    function getPoli(){
+        $.ajax({
+            url: urlPath.poli,
+            success: function(response){
+                if(response.length >0){
+                     $.each( response, function( key, value ) {
+                         var status = key == 0? 'active':''
+                         var url = window.location.origin+'/storage/images/carousel/'+value.file;
+
+                         $('#list_poli').append(`
+                            <div class="col-4 item_content">
+                                    <img src="{{ asset('img/hospital_icon.png') }}" alt="" class="item_content_icon">
+                                    <h4>${value.nama} (${value.kode})</h4>
+                                    ${value.keterangan!=null?value.keterangan:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum iure alias obcaecati tempore sit. Blanditiis quibusdam repellat nobis velit deleniti.'}
+                                </div>
+                         `)
+                     });
+                 } else{
+                        for(let i =0; i<5;i++){            
+                            $("#list_poli").append(`
+                                <div class="col-4 item_content">
+                                    <img src="{{ asset('img/hospital_icon.png') }}" alt="" class="item_content_icon">
+                                    <h4>Laboratorium Klinik</h4>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum iure alias obcaecati tempore sit. Blanditiis quibusdam repellat nobis velit deleniti.
+                                </div>     
+                            `)
+                        }
+                 }
+            }
+        })
     }
 
     function getFasilitas(){
-        for(let i =0; i<3;i++){
-            var active ="";
-            if(i==0){
-                active ="active"
-            }
-            
-            $(".fasilitas_content").append(`
-                <div class="carousel-item `+active+`">
-                                <div class="row">
+        var type= 0;
+        $.ajax({
+            url: urlPath.fasilitas,
+            data:{
+                type: type
+            },
+            success: function(response){
 
-                                    <div class="col-md-6 mb-3">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h4 class="card-title">Special title treatment</h4>
-                                                <p class="card-text">With supporting text below as a natural lead-in to
-                                                    additional content.</p>
-                                            </div>
+                if(response.length>0){
+                    var init_section = 0
+                    $.each(response, function( key, value ) {
+                        var status = key == 0? 'active':''
 
-                                        </div>
+                        if(key%4==0 || key == 0){
+                            init_section++
+                            $("#list_fasilitas").append(`<div class="carousel-item `+status+`"><div class="row" id=fasilitas_section_list_${init_section}></div></div>`)
+                        }
+
+                        $("#fasilitas_section_list_"+init_section).append(`
+                            <div class="col-md-6 mb-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">${value.nama}</h4>
+                                        <p class="card-text">${value.keterangan}</p>
                                     </div>
-                                    <div class="col-md-6 mb-3">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h4 class="card-title">Special title treatment</h4>
-                                                <p class="card-text">With supporting text below as a natural lead-in to
-                                                    additional content.</p>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h4 class="card-title">Special title treatment</h4>
-                                                <p class="card-text">With supporting text below as a natural lead-in to
-                                                    additional content.</p>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h4 class="card-title">Special title treatment</h4>
-                                                <p class="card-text">With supporting text below as a natural lead-in to
-                                                    additional content.</p>
-                                            </div>
-
-                                        </div>
-                                    </div>
-
                                 </div>
                             </div>
-            `)
-        }
+                        `)
+                    });
+                } else{
+                    for(let i =0; i<3;i++){
+                        var active ="";
+                        if(i==0){
+                            active ="active"
+                        }
+                        
+                        $("#list_fasilitas").append(`
+                            <div class="carousel-item `+active+`">
+                                            <div class="row">
+
+                                                <div class="col-md-6 mb-3">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h4 class="card-title">Special title treatment</h4>
+                                                            <p class="card-text">With supporting text below as a natural lead-in to
+                                                                additional content.</p>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h4 class="card-title">Special title treatment</h4>
+                                                            <p class="card-text">With supporting text below as a natural lead-in to
+                                                                additional content.</p>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h4 class="card-title">Special title treatment</h4>
+                                                            <p class="card-text">With supporting text below as a natural lead-in to
+                                                                additional content.</p>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h4 class="card-title">Special title treatment</h4>
+                                                            <p class="card-text">With supporting text below as a natural lead-in to
+                                                                additional content.</p>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                        `)
+                    }
+                }
+            }
+        })
+
+
     }
 
     function getBerita(){

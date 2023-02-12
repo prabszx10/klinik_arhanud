@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 //FrontEnd
 Route::get('/', 'FrontEnd\HomeController@index')->name('home');
-Route::get('/FasilitasDanLayanan', 'FrontEnd\FasilitasDanLayananController@index')->name('fasilitas');
+Route::get('/KegiatanDanBerita', 'FrontEnd\KegiatanDanBeritaController@index')->name('kegiatanDanBerita');
 Route::get('/TenagaMedis', 'FrontEnd\TenagaMedisController@index')->name('tenagaMedis');
 Route::get('/DaftarOnline', 'FrontEnd\DaftarOnlineController@index')->name('daftarOnline');
 Route::post('/registrasiOnline', 'FrontEnd\DaftarOnlineController@registrasi')->name('daftarOnline.registrasi');
@@ -29,6 +29,7 @@ Route::post('/daftarAntrian', 'FrontEnd\DaftarOnlineController@daftar_antrian')-
 Route::get('/antrianSaatIni', 'FrontEnd\DaftarOnlineController@antrian_saat_ini')->name('daftarOnline.antrianSaatIni');
 Route::get('/checkDB', 'FrontEnd\DaftarOnlineController@check_db')->name('daftarOnline.checkDB');
 
+Route::get('/TentangKami', 'FrontEnd\TentangKamiController@index')->name('tentangKami');
 
 //Main
 Route::get('/dashboard', 'MainController@index')->name('dashboard')->middleware('auth');
@@ -134,6 +135,11 @@ Route::group(['prefix'=>'','as'=>'select.'], function()
 {
   Route::get('/selectPasien', ['as' => 'pasien', 'uses' => 'BackEnd\PasienController@select']);
   Route::get('/selectAntrian', ['as' => 'antrian', 'uses' => 'BackEnd\AntrianController@select']);
+  Route::get('/selectCarousel', ['as' => 'carousel', 'uses' => 'BackEnd\Home\GambarCarouselController@select']);
+  Route::get('/selectPoli', ['as' => 'poli', 'uses' => 'BackEnd\PoliController@select']);
+  Route::get('/selectFasilitas', ['as' => 'fasilitas', 'uses' => 'BackEnd\FasilitasDanLayananController@select']);
+  Route::get('/selectTentangKami', ['as' => 'tentangKami', 'uses' => 'BackEnd\TentangKamiController@select']);
+
 });
 
 
@@ -170,5 +176,46 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/show', ['as' => '.show', 'uses' => 'BackEnd\AntrianController@show']);
     Route::get('/onAntrian', ['as' => '.onAntrian', 'uses' => 'BackEnd\AntrianController@onAntrian']);
     Route::get('/onDetail', ['as' => '.onDetail', 'uses' => 'BackEnd\AntrianController@onDetail']);
+  });
+
+  // Halaman Depan
+  Route::group(['prefix'=>'home','as'=>'home'], function()
+  {
+    Route::get('/gambarCarousel', ['as' => '.gambarCarousel','uses' => 'BackEnd\Home\GambarCarouselController@index']);
+    Route::post('/gambarCarousel/insert_update', ['as' => '.gambarCarousel.insert_update','uses' => 'BackEnd\Home\GambarCarouselController@insert_update']);
+    Route::get('/gambarCarousel/select', ['as' => '.gambarCarousel.select','uses' => 'BackEnd\Home\GambarCarouselController@select']);
+    Route::post('/gambarCarousel/delete', ['as' => '.gambarCarousel.delete','uses' => 'BackEnd\Home\GambarCarouselController@delete']);
+    
+  });
+
+  Route::group(['prefix'=>'tentangKami','as'=>'tentangKami'], function()
+  {
+    Route::get('/BackEnd/{id}', ['as' => '.tentangKami','uses' => 'BackEnd\TentangKamiController@index']);
+    Route::post('/insert_update', ['as' => '.insert_update','uses' => 'BackEnd\TentangKamiController@insert_update']);
+    Route::get('/select', ['as' => '.select', 'uses' => 'BackEnd\TentangKamiController@select']);
+  });
+
+  Route::group(['prefix'=>'fasilitas','as'=>'fasilitas'], function()
+  {
+    Route::get('/', ['uses' => 'BackEnd\FasilitasDanLayananController@index']);
+    Route::post('/insert_update', ['as' => '.insert_update','uses' => 'BackEnd\FasilitasDanLayananController@insert_update']);
+    Route::get('/select', ['as' => '.select', 'uses' => 'BackEnd\FasilitasDanLayananController@select']);
+    Route::post('/delete', ['as' => '.delete','uses' => 'BackEnd\FasilitasDanLayananController@delete']);
+  });
+
+  Route::group(['prefix'=>'layanan','as'=>'layanan'], function()
+  {
+    Route::get('/', ['uses' => 'BackEnd\FasilitasDanLayananController@indexLayanan']);
+    Route::post('/insert_update', ['as' => '.insert_update','uses' => 'BackEnd\FasilitasDanLayananController@insert_update']);
+    Route::get('/select', ['as' => '.select', 'uses' => 'BackEnd\FasilitasDanLayananController@select']);
+    Route::post('/delete', ['as' => '.delete','uses' => 'BackEnd\FasilitasDanLayananController@delete']);
+  });
+
+  Route::group(['prefix'=>'kemitraan','as'=>'kemitraan'], function()
+  {
+    Route::get('/', ['uses' => 'BackEnd\KemitraanController@index']);
+    Route::post('/insert_update', ['as' => '.insert_update','uses' => 'BackEnd\KemitraanController@insert_update']);
+    Route::get('/select', ['as' => '.select', 'uses' => 'BackEnd\KemitraanController@select']);
+    Route::post('/delete', ['as' => '.delete','uses' => 'BackEnd\KemitraanController@delete']);
   });
 });

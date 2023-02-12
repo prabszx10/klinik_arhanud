@@ -1,5 +1,5 @@
 :root {
-    --primary: rgb(0, 136, 255);
+    --primary: #1AB1E5;
 }
 
 @media all and (min-width: 992px) {
@@ -12,7 +12,7 @@
 .navbar{
     background: rgb(255, 255, 255, 0.9);
     padding-left: 3vw;
-    border-bottom: 1px solid var(--primary);
+    /* border-bottom: 1px solid var(--primary); */
 }
 
 .nav-item{

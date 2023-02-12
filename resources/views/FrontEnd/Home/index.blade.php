@@ -13,16 +13,7 @@
         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
         <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
     </ol>
-    <div class="carousel-inner">
-        <div class="carousel-item active slider_home">
-            <img class="d-block w-100" src="{{ asset('img/home_rumah_sakit.jpg') }}"
-                alt="First slide">
-        </div>
-        <div class="carousel-item slider_home">
-            <img class="d-block w-100" src="{{ asset('img/fasilitas.jpeg') }}"
-                alt="Second slide">
-        </div>
-    </div>
+    <div class="carousel-inner" id="list_carousel"></div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
@@ -39,7 +30,7 @@
             <h1 class="mb-3">Poli Yang Tersedia</h1>
         </div>
         <div class="col-12">
-            <div class="row d-flex justify-content-center layanan_content">
+            <div class="row d-flex justify-content-center layanan_content" id="list_poli">
             </div>
         </div>
     </div>
@@ -69,7 +60,7 @@
                 </div>
                 <div class="col-12">
                     <div id="carouselExampleIndicators2 fasilitas_slider" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner fasilitas_content"></div>
+                        <div class="carousel-inner fasilitas_content" id="list_fasilitas"></div>
                     </div>
                 </div>
             </div>
@@ -78,7 +69,7 @@
 </div>
 
 <div class="section_spacer">
-    <h3>Visi Kami</h3>
+    <h3>Motto Kami</h3>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa voluptas quibusdam, blanditiis nemo dolorem
         dignissimos.</p>
 </div>

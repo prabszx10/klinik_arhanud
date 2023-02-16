@@ -22,6 +22,15 @@ class TentangKamiController extends BaseController
         return $operation;
     }
 
+    public function selectAll(){
+        $data = DB::table('tentang_kami')->get();
+        $decode = json_decode(json_encode($data), true);
+        foreach($decode as $k=>$v){
+            $operation[$v['type']] = $v['content'];
+        }
+        return $operation;
+    }
+
     public function insert_update(Request $request){
         foreach($request->all() as $key=>$val){
             if($key != '_token'){

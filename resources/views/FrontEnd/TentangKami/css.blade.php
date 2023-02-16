@@ -11,7 +11,7 @@
 
     /* informasi */
     .informasi_singkat{
-        padding: 5vw 18vw;
+        padding: 5vw 10vw;
         display: flex;
     }
 
@@ -46,15 +46,19 @@
         border-radius: 10px
     }
 
+
+    .item_list{
+        padding: 1vw;
+        box-shadow: 0 4px 8px 0 #cff3ff, 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        border-radius: 10px
+    }
     /* fasilitas */
     .fasilitas{
         padding: 5vw 18vw;
-        display: flex;
-        gap: 1vw
     }
 
     .fasilitas h2{
-        text-align: center;
+        text-align: left;
         color: var(--primary);
     }
 
@@ -97,5 +101,15 @@
     .mitra h2{
         text-align: center;
         color: var(--primary);
+    }
+
+    ul { 
+        color:  var(--primary);
+         text-align: left;
+         margin:0;
+        }
+
+    .text-wrapper {    
+        color: black; 
     }
 </style>

@@ -138,7 +138,7 @@ Route::group(['prefix'=>'','as'=>'select.'], function()
   Route::get('/selectCarousel', ['as' => 'carousel', 'uses' => 'BackEnd\Home\GambarCarouselController@select']);
   Route::get('/selectPoli', ['as' => 'poli', 'uses' => 'BackEnd\PoliController@select']);
   Route::get('/selectFasilitas', ['as' => 'fasilitas', 'uses' => 'BackEnd\FasilitasDanLayananController@select']);
-  Route::get('/selectTentangKami', ['as' => 'tentangKami', 'uses' => 'BackEnd\TentangKamiController@select']);
+  Route::get('/selectTentangKami', ['as' => 'tentangKami', 'uses' => 'BackEnd\TentangKamiController@selectAll']);
 
 });
 

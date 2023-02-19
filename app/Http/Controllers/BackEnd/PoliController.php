@@ -24,6 +24,15 @@ class PoliController extends BaseController
         }
         return $operation;
     }
+    
+    public function selectPoli(Request $request){
+        if(isset($request->id)){
+            $operation = Poli::where('id',$request->id)->first();
+        } else{
+            $operation = Poli::where('deleted',0)->where('status',1)->get();
+        }
+        return $operation;
+    }
 
     public function insert_update(Request $request){
         $data['nama'] = $request->nama_poli;
@@ -48,5 +57,29 @@ class PoliController extends BaseController
         $operation = $this->update('poli',$request->id,$data);
 
         return $operation;
+    }
+
+    public function antrian_saat_ini(){
+        $get_poli = DB::table('poli')->where('status','1')->get();
+        $data = json_decode(json_encode($get_poli), true);
+
+        $operation =[];
+        if(isset($data)){
+            foreach($data as $val){
+                $get_antrian = DB::table('antrian')->where('status','0')->where('poli_id', $val['id'])->orderBy('created_at', 'asc')->first();
+                $data_antrian = json_decode(json_encode($get_antrian), true);
+
+                if(isset($data_antrian)){
+                    $push = array(
+                        'id'=> $val['id'],
+                        'antrian'=> $data_antrian['no_antrian'].$val['kode']
+                    );
+                    array_push($operation,$push);
+                }
+            }
+        }
+
+        return $operation;
+
     }
 }

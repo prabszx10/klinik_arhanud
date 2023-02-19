@@ -78,8 +78,8 @@
                     <div class="bg-white py-2 collapse-inner rounded">
 
                         <a class="collapse-item" href="{{ route('home.gambarCarousel') }}">Gambar Carousel</a>
-                        <a class="collapse-item"
-                            href="{{ route('lab.tambah') }}">Footer</a>
+                        {{-- <a class="collapse-item"
+                            href="{{ route('lab.tambah') }}">Footer</a> --}}
                     </div>
                 </div>
             </li>
@@ -104,13 +104,13 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link {{ set_menu('poli') }}" href="{{ route('poli') }}">
+              <a class="nav-link {{ set_menu('poli') }}" href="{{ route('tenagaMedis') }}">
                   <i class="fas fa-fw fa-portrait"></i>
                   <span>Tenaga Medis</span>
               </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {{ set_menu('poli') }}" href="{{ route('poli') }}">
+            <a class="nav-link {{ set_menu('poli') }}" href="{{ route('berita') }}">
                 <i class="fas fa-fw fa-portrait"></i>
                 <span>Kegiatan Dan Berita</span>
             </a>

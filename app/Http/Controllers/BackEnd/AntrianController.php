@@ -16,7 +16,11 @@ class AntrianController extends BaseController
 
     public function select(Request $request){
         if(isset($request->id)){
-            $operation = DB::table('v_antrian')->where('poli_id',$request->id)->get();
+            if($request->history == 'history'){
+                $operation = DB::table('v_antrian')->where('poli_id',$request->id)->where('created_at','NOT LIKE',date('Y-m-d'). '%')->get();
+            } else{
+                $operation = DB::table('v_antrian')->where('poli_id',$request->id)->where('created_at','LIKE',date('Y-m-d'). '%')->get();
+            }
         } else{
             $operation = DB::table('v_antrian')->get();
         }

@@ -136,10 +136,10 @@ Route::group(['prefix'=>'','as'=>'select.'], function()
   Route::get('/selectPasien', ['as' => 'pasien', 'uses' => 'BackEnd\PasienController@select']);
   Route::get('/selectAntrian', ['as' => 'antrian', 'uses' => 'BackEnd\AntrianController@select']);
   Route::get('/selectCarousel', ['as' => 'carousel', 'uses' => 'BackEnd\Home\GambarCarouselController@select']);
-  Route::get('/selectPoli', ['as' => 'poli', 'uses' => 'BackEnd\PoliController@select']);
+  Route::get('/selectPoli', ['as' => 'poli', 'uses' => 'BackEnd\PoliController@selectPoli']);
   Route::get('/selectFasilitas', ['as' => 'fasilitas', 'uses' => 'BackEnd\FasilitasDanLayananController@select']);
   Route::get('/selectTentangKami', ['as' => 'tentangKami', 'uses' => 'BackEnd\TentangKamiController@selectAll']);
-
+  Route::get('/selectKemitraan', ['as' => 'kemitraan', 'uses' => 'BackEnd\KemitraanController@select']);
 });
 
 
@@ -150,6 +150,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/insert_update', ['as' => '.insert_update','uses' => 'BackEnd\PoliController@insert_update']);
     Route::post('/delete', ['as' => '.delete','uses' => 'BackEnd\PoliController@delete']);
     Route::get('/show', ['as' => '.show', 'uses' => 'BackEnd\PoliController@show']);
+    Route::get('/antrianSaatIni', ['as' => '.antrian', 'uses' => 'BackEnd\PoliController@antrian_saat_ini']);
   });
 
   Route::group(['prefix'=>'agama','as'=>'agama'], function()
@@ -217,5 +218,21 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/insert_update', ['as' => '.insert_update','uses' => 'BackEnd\KemitraanController@insert_update']);
     Route::get('/select', ['as' => '.select', 'uses' => 'BackEnd\KemitraanController@select']);
     Route::post('/delete', ['as' => '.delete','uses' => 'BackEnd\KemitraanController@delete']);
+  });
+
+  Route::group(['prefix'=>'tenagaMedis','as'=>'tenagaMedis'], function()
+  {
+    Route::get('/', ['uses' => 'BackEnd\TenagaMedisController@index']);
+    Route::post('/insert_update', ['as' => '.insert_update','uses' => 'BackEnd\TenagaMedisController@insert_update']);
+    Route::get('/select', ['as' => '.select', 'uses' => 'BackEnd\TenagaMedisController@select']);
+    Route::post('/delete', ['as' => '.delete','uses' => 'BackEnd\TenagaMedisController@delete']);
+  });
+
+  Route::group(['prefix'=>'berita','as'=>'berita'], function()
+  {
+    Route::get('/', ['uses' => 'BackEnd\BeritaController@index']);
+    Route::post('/insert_update', ['as' => '.insert_update','uses' => 'BackEnd\BeritaController@insert_update']);
+    Route::get('/select', ['as' => '.select', 'uses' => 'BackEnd\BeritaController@select']);
+    Route::post('/delete', ['as' => '.delete','uses' => 'BackEnd\BeritaController@delete']);
   });
 });

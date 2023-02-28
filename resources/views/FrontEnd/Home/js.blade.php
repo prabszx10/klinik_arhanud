@@ -1,8 +1,4 @@
 <script>
-    $('.isactive').removeClass( "isactive" );
-    $('#beranda').addClass( "isactive" );
-
-
     var urlPath ={
         carousel: "{{ route('select.carousel') }}",
         poli: "{{ route('select.poli') }}",
@@ -14,8 +10,8 @@
     function getData(){
         getCarousel()
         getPoli()
-        getFasilitas()
-        getBerita()
+        // getFasilitas()
+        // getBerita()
     }
 
     function getCarousel(){

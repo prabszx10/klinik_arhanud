@@ -10,7 +10,7 @@
     .title_content{
         height: 200px;
         background-color: #f9f9f9;
-        padding: 80px;
+        padding: 100px;
     }
 
     /* dokter */

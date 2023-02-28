@@ -6,86 +6,41 @@
         <h6 class="m-0 font-weight-bold text-primary">Data Antrian Pasien</h6>
     </div>
     <div class="card-body">
-        <div class="row">
-            <div class="col-4 p-3">
-                <div class="card center">
-                    <div class="card-body row bg-info text-light rounded">
-                        <div class="col-8">
-                            <h2 class="card-title">Poli Gigi</h2>
-                            <a href="javascript:onAntrian('1','skip')" class="btn btn-danger">Lewati <span
-                                    class="fa fa-times"></span></a>
-                            <a href="javascript:onAntrian('1','next')" class="btn btn-success">Lanjut <span
-                                    class="fa fa-chevron-right"></span></a>
-                        </div>
-                        <div class="col-4">
-                            <input type="hidden" id="input_poli_1">
-                            <h1 class="card-subtitle poli_gigi" style="font-size: 60px">0</h1>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-4 p-3">
-                <div class="card center">
-                    <div class="card-body row bg-primary text-light rounded">
-                        <div class="col-8">
-                            <h2 class="card-title">Poli Umum</h2>
-                            <a href="javascript:onAntrian('2','skip')" class="btn btn-danger">Lewati <span
-                                    class="fa fa-times"></span></a>
-                            <a href="javascript:onAntrian('2','next')" class="btn btn-success">Lanjut <span
-                                    class="fa fa-chevron-right"></span></a>
-                        </div>
-                        <div class="col-4">
-                            <input type="hidden" id="input_poli_2">
-                            <h1 class="card-subtitle poli_umum" style="font-size: 60px">0</h1>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-4 p-3">
-                <div class="card center">
-                    <div class="card-body row bg-secondary text-light rounded">
-                        <div class="col-8">
-                            <h2 class="card-title">Poli Lorem</h2>
-                            <a href="#" class="btn btn-danger">Lewati <span class="fa fa-times"></span></a>
-                            <a href="#" class="btn btn-success">Lanjut <span class="fa fa-chevron-right"></span></a>
-                        </div>
-                        <div class="col-4">
-                            <h1 class="card-subtitle" style="font-size: 60px">0</h1>
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#tab_antrian" onclick="onShowTab('')">Antrian Hari Ini</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#tab_antrian" onclick="onShowTab('history')">Riwayat Antrian</a>
+            </li>
+        </ul>
+        <div class="tab-content mt-4">
+            <div class="tab-pane active" id="tab_table">
+                <div class="row" id="antrian_list"></div>
+        
+                <ul class="nav nav-tabs" id='poli_tab'></ul>
+                <div class="tab-content mt-4">
+                    <div class="tab-pane active" id="tab_table">
+                        <div class="table-responsive" id="data_table">
+                            <table id="example" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>No Antrian</th>
+                                        <th>NO BPJS</th>
+                                        <th>Nama Pasien</th>
+                                        <th>Status Antrian</th>
+                                        <th>Tindakan</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tableData"></tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <ul class="nav nav-tabs">
-            <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#tab_table" onclick="getData('1')">Poli Gigi</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#tab_table" onclick="getData('2')">Poli Umum</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#tab_table" onclick="">Poli Lorem</a>
-            </li>
-        </ul>
-        <div class="tab-content mt-4">
-            <div class="tab-pane active" id="tab_table">
-                <div class="table-responsive" id="data_table">
-                    <table id="example" class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>No Antrian</th>
-                                <th>NO BPJS</th>
-                                <th>Nama Pasien</th>
-                                <th>Status Antrian</th>
-                                <th>Tindakan</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tableData"></tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+        
     </div>
 </div>
 
@@ -135,6 +90,5 @@
     </div>
 </div>
 
-@include('BackEnd.Antrian.form')
 @include('BackEnd.Antrian.js')
 @endsection

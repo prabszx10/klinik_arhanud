@@ -6,9 +6,9 @@
     });
 
     var urlPath ={
-        insert_update: "{{ route('fasilitas.insert_update') }}",
-        delete: "{{ route('fasilitas.delete') }}",
-        select: "{{ route('fasilitas.select') }}",
+        insert_update: "{{ route('tenagaMedis.insert_update') }}",
+        delete: "{{ route('tenagaMedis.delete') }}",
+        select: "{{ route('tenagaMedis.select') }}",
     }
 
     getData()
@@ -47,15 +47,13 @@
     }
 
     function onEdit(id){
-        var type= 0;
-        // $('#btn-preview').html('')
         $.ajax({
             url: urlPath.select,
             data:{
                 id: id,
-                type: type
             },
             success: function(response){
+                console.log(response)
                 $.each( response, function( key, value ) {
                     if(key != 'file'){
                         $("#"+key).val(value);
@@ -63,10 +61,11 @@
                 }) 
 
                 if(response.file != null){
+                    $('#btn-preview').show()
                     $('#btn-preview').html(`<span class="badge badge-success" style="cursor:pointer" onclick="onModal('${response.file}')">Preview File</span>`)
                 }
 
-                $('.formTitle').html('Edit Fasilitas')
+                $('.formTitle').html('Edit Tenaga Medis')
                 $('.btnBatal').show()
             }
         })
@@ -140,14 +139,14 @@
     function onReset(){
         getData()
         $("#id").val('')
-        $('#btn-preview').remove()
+        $('#btn-preview').hide()
         $('#formData')[0].reset();
-        $('.formTitle').html('Tambah Fasilitas')
+        $('.formTitle').html('Tambah Tenaga Medis')
         $('.btnBatal').hide()
     }
 
     function onModal(file){
-        var url = window.location.origin+'/storage/images/fasilitasLayanan/'+file;
+        var url = window.location.origin+'/storage/images/tenaga_medis/'+file;
         $('.modal-body').html('  <embed src="'+url+'" width="100%" ></embed>')
         $('#modal_detail').modal('show')
     }

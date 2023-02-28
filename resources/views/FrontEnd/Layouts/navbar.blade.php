@@ -6,7 +6,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    {{-- <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav mr-0 mt-2 mt-lg-0">
             <li class="nav-item isactive" id="beranda">
                 <a class="nav-link" href="<?=URL::route('home');?>">Beranda <span class="sr-only">(current)</span></a>
@@ -22,6 +22,30 @@
 
             <li class="nav-item" id="kegiatanBerita">
                 <a class="nav-link" href="<?=URL::route('kegiatanDanBerita');?>">Kegiatan dan Berita</a>
+            </li>
+
+            <li class="nav-item" id="daftarOnline">
+                <a class="nav-link" href="<?=URL::route('daftarOnline');?>">Daftar Online</a>
+            </li>
+        </ul>
+    </div> --}}
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav mr-0 mt-2 mt-lg-0">
+            <li class="nav-item isactive" id="nav_section_home">
+                <a class="nav-link" href="<?=URL::route('home');?>" onclick="scrollDiv('section_home'); return false;">Beranda</span></a>
+            </li>
+
+            <li class="nav-item" id="nav_section_tentang_kami">
+                <a class="nav-link" href="#" onclick="scrollDiv('section_tentang_kami'); return false;">Tentang Kami</a>
+            </li>
+
+            <li class="nav-item" id="nav_section_tenaga_medis">
+                <a class="nav-link" href="#" onclick="scrollDiv('section_tenaga_medis'); return false;">Tenaga Medis</a>
+            </li>
+
+            <li class="nav-item" id="nav_section_berita">
+                <a class="nav-link" href="#" onclick="scrollDiv('section_berita'); return false;">Kegiatan dan Berita</a>
             </li>
 
             <li class="nav-item" id="daftarOnline">

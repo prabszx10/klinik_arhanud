@@ -2,6 +2,28 @@
     --primary: #1AB1E5;
 }
 
+body {
+    border-color: white;
+}
+
+/* body {
+    font-family: 'Raleway', sans-serif;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/img/white_bg.jpg');
+    opacity: 0.4;
+    z-index: -1;
+  } */
+
 @media all and (min-width: 992px) {
 	.navbar .nav-item .dropdown-menu{ display: none; }
 	.navbar .nav-item:hover .nav-link{   }
@@ -10,7 +32,7 @@
 }
 
 .navbar{
-    background: rgb(255, 255, 255, 0.9);
+    background: rgb(255, 255, 255, 1);
     padding-left: 3vw;
     /* border-bottom: 1px solid var(--primary); */
 }
@@ -71,10 +93,6 @@ p,h2{
     background-color: rgb(0, 136, 255,0.05);
 }
 
-.section_tenaga_medis{
-    padding: 2vw 4vw 2vw;
-    min-height: 150px;
-}
 .title_content{
     color: var(--primary);
     text-align: center;

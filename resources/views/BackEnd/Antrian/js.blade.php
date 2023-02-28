@@ -1,6 +1,7 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script type="text/javascript">
+    var history_data = '';
     $(document).ready(function () {
         $('#example').DataTable();
     });
@@ -11,10 +12,11 @@
         delete: "{{ route('antrian.delete') }}",
         onAntrian: "{{ route('antrian.onAntrian') }}",
         onDetail: "{{ route('antrian.onDetail') }}",
+        selectPoli: "{{ route('select.poli') }}",
     }
 
     getData()
-    getAntrianSaatIni()
+    getPoli()
 
     function getData(id=''){
         if(id == ''){
@@ -23,7 +25,8 @@
         $.ajax({
             url: urlPath.select,
             data:{
-                id: id
+                id: id,
+                history: history_data
             },
             success: function(response){
                 $('#tableData').html('')
@@ -66,13 +69,15 @@
     }
 
     function getAntrianSaatIni(){
-        $('.poli_gigi').html(0)
-        $('.poli_umum').html(0)
+        $('.no_antrian_saat_ini').html(0)
         $.ajax({
-            url: "{{ route('daftarOnline.antrianSaatIni') }}",
+            url: "{{ route('poli.antrian') }}",
             success: function(response){
-                $('.poli_gigi').html(response['Poli Gigi'])
-                $('.poli_umum').html(response['Poli Umum'])
+                if(response.length>0){
+                    $.each(response, function( key, value ) {
+                        $('#poli_'+value.id).html(value.antrian)
+                    });
+                }
             }
         })
     }
@@ -110,4 +115,64 @@
             }
         })
    }
+
+   function onShowTab(type){
+        if(type == 'history'){
+            $('#antrian_list').hide()
+            history_data = 'history';
+            getData()
+        } else{
+            $('#antrian_list').show()
+            history_data = '';
+            getData()
+        }
+   }
+
+   function getPoli(){
+        $.ajax({
+            url: urlPath.selectPoli,
+            success: function(response){
+                
+
+                if(response.length>0){
+                    $.each( response, function( key, value ) {
+                        var status = '';
+
+                        if(key==0){
+                            status = 'active'
+                        }
+
+                        $('#antrian_list').append(`
+                            <div class="col-4 p-3">
+                                <div class="card center">
+                                    <div class="card-body row bg-info text-light rounded">
+                                        <div class="col-8">
+                                            <h2 class="card-title">${value.nama}</h2>
+                                            <a href="javascript:onAntrian(${value.id},'skip')" class="btn btn-danger">Lewati <span
+                                                    class="fa fa-times"></span></a>
+                                            <a href="javascript:onAntrian(${value.id},'next')" class="btn btn-success">Lanjut <span
+                                                    class="fa fa-chevron-right"></span></a>
+                                        </div>
+                                        <div class="col-4">
+                                            <h1 class="card-subtitle no_antrian_saat_ini" id="poli_${value.id}" style="font-size: 60px">0</h1>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `)
+
+                        $('#poli_tab').append(`
+                            <li class="nav-item">
+                                <a class="nav-link ${status}" data-toggle="tab" href="#tab_table" onclick="getData(${value.id})">${value.nama}</a>
+                            </li>
+                        `)
+                    });
+
+                    getAntrianSaatIni()
+                } else{
+                    
+                }
+            }
+        })
+    }
  </script>

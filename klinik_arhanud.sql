@@ -11,7 +11,7 @@
  Target Server Version : 100137 (10.1.37-MariaDB)
  File Encoding         : 65001
 
- Date: 19/02/2023 17:12:33
+ Date: 28/02/2023 07:04:33
 */
 
 SET NAMES utf8mb4;
@@ -123,7 +123,7 @@ CREATE TABLE `fasilitasLayanan` (
   `file` varchar(255) DEFAULT NULL,
   `type` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of fasilitasLayanan
@@ -131,13 +131,14 @@ CREATE TABLE `fasilitasLayanan` (
 BEGIN;
 INSERT INTO `fasilitasLayanan` (`id`, `nama`, `keterangan`, `file`, `type`) VALUES (26, 'Fasilitas Terbaru', 'sadfasfasfasdf', 'fasilitas1676183195.jpg', 0);
 INSERT INTO `fasilitasLayanan` (`id`, `nama`, `keterangan`, `file`, `type`) VALUES (27, 'asfasdf', 'asdfasdf', 'fasilitas1676183266.jpg', 0);
-INSERT INTO `fasilitasLayanan` (`id`, `nama`, `keterangan`, `file`, `type`) VALUES (28, 'jangan tangs', 'asdfasdfsaf', NULL, 0);
+INSERT INTO `fasilitasLayanan` (`id`, `nama`, `keterangan`, `file`, `type`) VALUES (28, 'jangan tangs', 'asdfasdfsaf', 'fasilitas1676802341.png', 0);
 INSERT INTO `fasilitasLayanan` (`id`, `nama`, `keterangan`, `file`, `type`) VALUES (29, 'weqrqwr', 'asdfasdf', NULL, 0);
-INSERT INTO `fasilitasLayanan` (`id`, `nama`, `keterangan`, `file`, `type`) VALUES (30, 'asdfasdf', 'asdfasdf', NULL, 0);
+INSERT INTO `fasilitasLayanan` (`id`, `nama`, `keterangan`, `file`, `type`) VALUES (30, 'asdfasdf', 'asdfasdf', 'fasilitas1676802375.jpg', 0);
 INSERT INTO `fasilitasLayanan` (`id`, `nama`, `keterangan`, `file`, `type`) VALUES (31, 'asdfasdf', 'asdfasdf', NULL, 0);
 INSERT INTO `fasilitasLayanan` (`id`, `nama`, `keterangan`, `file`, `type`) VALUES (32, 'sdfasdfas', 'asdfasdf', NULL, 0);
 INSERT INTO `fasilitasLayanan` (`id`, `nama`, `keterangan`, `file`, `type`) VALUES (33, 'asdfasdf', 'asdfasfd', NULL, 0);
 INSERT INTO `fasilitasLayanan` (`id`, `nama`, `keterangan`, `file`, `type`) VALUES (34, 'Rawat Jalan', 'Ini Keterangan Rawat Jalan Dari Pasien', 'fasilitas1676706540.png', 1);
+INSERT INTO `fasilitasLayanan` (`id`, `nama`, `keterangan`, `file`, `type`) VALUES (35, 'Layanan Terbaru', 'Ini Ketrangan Layanan', 'fasilitas1676802433.jpg', 1);
 COMMIT;
 
 -- ----------------------------
@@ -186,14 +187,13 @@ CREATE TABLE `kemitraan` (
   `keterangan` text,
   `file` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of kemitraan
 -- ----------------------------
 BEGIN;
 INSERT INTO `kemitraan` (`id`, `nama`, `keterangan`, `file`) VALUES (1, 'Buenos Venturo', 'asdfasfd', 'kemitraan1676181049.jpeg');
-INSERT INTO `kemitraan` (`id`, `nama`, `keterangan`, `file`) VALUES (28, 'ffff', NULL, '/private/var/folders/5h/9s_kd51n6k7gpf2qb6mmvcq00000gn/T/phpelxdsN');
 COMMIT;
 
 -- ----------------------------
@@ -393,7 +393,7 @@ CREATE TABLE `poli` (
   `kode` varchar(100) DEFAULT NULL,
   `deleted` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of poli
@@ -403,6 +403,7 @@ INSERT INTO `poli` (`id`, `nama`, `keterangan`, `status`, `kode`, `deleted`) VAL
 INSERT INTO `poli` (`id`, `nama`, `keterangan`, `status`, `kode`, `deleted`) VALUES (2, 'Poli Umum', NULL, 1, 'B', 0);
 INSERT INTO `poli` (`id`, `nama`, `keterangan`, `status`, `kode`, `deleted`) VALUES (3, 'Poli KAI', 'asdfasdfsadf', 1, 'C', 0);
 INSERT INTO `poli` (`id`, `nama`, `keterangan`, `status`, `kode`, `deleted`) VALUES (4, 'Poli Testing', 'KKK', 0, 'D', 1);
+INSERT INTO `poli` (`id`, `nama`, `keterangan`, `status`, `kode`, `deleted`) VALUES (5, 'Poli Baru', 'asdfasdf', 0, 'D', 1);
 COMMIT;
 
 -- ----------------------------
@@ -516,7 +517,7 @@ COMMIT;
 -- View structure for v_antrian
 -- ----------------------------
 DROP VIEW IF EXISTS `v_antrian`;
-CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `v_antrian` AS select `antrian`.`id` AS `id`,`antrian`.`pasien_id` AS `pasien_id`,`antrian`.`status` AS `status`,`antrian`.`no_antrian` AS `no_antrian`,`antrian`.`poli_id` AS `poli_id`,`poli`.`nama` AS `poli_nama`,`poli`.`kode` AS `poli_kode`,`antrian`.`created_at` AS `created_at`,`pasien`.`nama` AS `pasien_nama`,`pasien`.`nik` AS `pasien_nik`,`pasien`.`hp` AS `pasien_hp`,`pasien`.`no_bpjs` AS `pasien_no_bpjs` from ((`antrian` left join `poli` on((`antrian`.`poli_id` = `poli`.`id`))) join `pasien` on((`antrian`.`pasien_id` = `pasien`.`id`)));
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `v_antrian` AS select `antrian`.`id` AS `id`,`antrian`.`pasien_id` AS `pasien_id`,`antrian`.`status` AS `status`,`antrian`.`no_antrian` AS `no_antrian`,`antrian`.`poli_id` AS `poli_id`,`poli`.`nama` AS `poli_nama`,`poli`.`kode` AS `poli_kode`,`pasien`.`nama` AS `pasien_nama`,`pasien`.`nik` AS `pasien_nik`,`pasien`.`hp` AS `pasien_hp`,`pasien`.`no_bpjs` AS `pasien_no_bpjs`,`antrian`.`created_at` AS `created_at` from ((`antrian` left join `poli` on((`antrian`.`poli_id` = `poli`.`id`))) join `pasien` on((`antrian`.`pasien_id` = `pasien`.`id`)));
 
 -- ----------------------------
 -- View structure for v_pasien

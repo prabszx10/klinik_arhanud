@@ -6,7 +6,9 @@
 <script>
     function scrollDiv(type) {
         var div = document.getElementById(type);
-        div.scrollIntoView({ behavior: 'smooth' });
+        var margin = 60;
+        var topPos = div.getBoundingClientRect().top + window.pageYOffset - margin;
+        window.scrollTo({top: topPos, behavior: 'smooth'});
 
         $('.isactive').removeClass( "isactive" );
         $('#nav_'+type).addClass( "isactive" );

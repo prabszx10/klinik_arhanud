@@ -5,36 +5,43 @@
         {{-- <h5>Tenaga Medis yang Dimiliki Klinik Arhanud memiliki sertifikasi dan memiliki komptensi yang baik dibagiannya masing-masing dan selalu berkeinginan untuk memberikan pelayanan terbaik dan pengalaman yang terbaik kepada setiap pasien yang datang ke Klinik Arhanud Kota Batu.</h5> --}}
     </div>
     <div class="section">
-        <div class="row">
-            <div class="col-8">
-                <div class="row">
-                    <div class="col-6">
-                        <h2 class="mb-3">Kegiatan Dan Berita</h2>
+        <div class="group_berita">
+            <div class="left">
+                <img src="https://img-aws.ehowcdn.com/400x400/ds-img.studiod.com/Half_Dome_from_Glacier_Point0_1.jpg" alt="">
+                <div class="bottom-left"><div><h2>Ini Judul Baru </h2><h6>Selasa, 22 Agustus 2023</h6></div></div>
+            </div>
+            <div class="right">
+                <h4>Berita Dan Kegiatan</h4>
+                <div class="line"></div>
+                <div class="list_berita">
+                    <div class="item_list_berita">
+                        <h5>Ini Berita Terknin yang Wajib Kamu lihat disetiap daerah</h5>
+                        <p>Selasa, 3 Desember 2023</p>
                     </div>
-                    <div class="col-6 text-right">
-                        <a class="btn btn-primary mb-3 mr-1" href="#carouselExampleIndicators2 berita_slider" role="button"
-                            data-slide="prev">
-                            <i class="fa fa-arrow-left"></i>
-                        </a>
-                        <a class="btn btn-primary mb-3 " href="#carouselExampleIndicators2 berita_slider" role="button"
-                            data-slide="next">
-                            <i class="fa fa-arrow-right"></i>
-                        </a>
+
+                    <div class="item_list_berita">
+                        <h5>Ini Berita Terknin yang Wajib Kamu lihat disetiap daerah</h5>
+                        <p>Selasa, 3 Desember 2023</p>
                     </div>
-                    <div class="col-12">
-                        <div id="carouselExampleIndicators2 berita_slider" class="carousel slide" data-ride="carousel">
-                            <div class="carousel-inner berita_content"></div>
-                        </div>
+                    <div class="item_list_berita">
+                        <h5>Ini Berita Terknin yang Wajib Kamu lihat disetiap daerah</h5>
+                        <p>Selasa, 3 Desember 2023</p>
+                    </div>
+                    <div class="item_list_berita">
+                        <h5>Ini Berita Terknin yang Wajib Kamu lihat disetiap daerah</h5>
+                        <p>Selasa, 3 Desember 2023</p>
+                    </div>
+                    <div class="item_list_berita">
+                        <h5>Ini Berita Terknin yang Wajib Kamu lihat disetiap daerah</h5>
+                        <p>Selasa, 3 Desember 2023</p>
+                    </div>
+                    <div class="item_list_berita">
+                        <h5>Ini Berita Terknin yang Wajib Kamu lihat disetiap daerah</h5>
+                        <p>Selasa, 3 Desember 2023</p>
                     </div>
                 </div>
             </div>
-            <div class="col-4">
-                <img src="{{ asset('img/avatars/default.jpg') }}" alt="" srcset=""
-                    class="image_fasilitas">
-            </div>
-        </div>
-    
-    
+        </div>   
     </div>
 
 

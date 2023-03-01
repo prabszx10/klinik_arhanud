@@ -1,6 +1,6 @@
 <nav class="navbar sticky-top navbar-expand-lg navbar-light">
     {{-- <a class="navbar-brand" href="#">Navbar</a> --}}
-    <a class="navbar-brand" href="#"><img src="{{asset('img/arhanud_logo.png')}}" alt=""></a>
+    <a class="navbar-brand" href="#" id="app_logo"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
         aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

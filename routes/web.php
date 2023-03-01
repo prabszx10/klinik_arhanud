@@ -140,6 +140,9 @@ Route::group(['prefix'=>'','as'=>'select.'], function()
   Route::get('/selectFasilitas', ['as' => 'fasilitas', 'uses' => 'BackEnd\FasilitasDanLayananController@select']);
   Route::get('/selectTentangKami', ['as' => 'tentangKami', 'uses' => 'BackEnd\TentangKamiController@selectAll']);
   Route::get('/selectKemitraan', ['as' => 'kemitraan', 'uses' => 'BackEnd\KemitraanController@select']);
+  Route::get('/selectBerita', ['as' => 'berita', 'uses' => 'BackEnd\BeritaController@select']);
+  Route::get('/selectTenagaMedis', ['as' => 'tenagaMedis', 'uses' => 'BackEnd\TenagaMedisController@select']);
+  Route::get('/selectPengaturan', ['as' => 'pengaturan', 'uses' => 'PengaturanController@select']);
 });
 
 

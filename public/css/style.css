@@ -98,3 +98,8 @@ p,h2{
     text-align: center;
     margin: 0 auto;
 }
+
+.footnote{
+    padding-top: 1vw;
+    border-top: 0.5px solid var(--primary);
+}

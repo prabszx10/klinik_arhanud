@@ -16,6 +16,12 @@ class PengaturanController extends Controller
         
         return view('setting',['metadatas'=>$metadatas],['datas'=>$datas]);
     }
+
+    public function select() {
+        $data=DB::table('pengaturan')->where('id',1)->get();
+        return $data;
+    }
+
     public function simpan(Request $request){
             $this->validate($request, [
                 'nama_klinik' => 'required|min:4|max:25',

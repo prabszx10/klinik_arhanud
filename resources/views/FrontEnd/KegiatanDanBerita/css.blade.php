@@ -70,8 +70,8 @@
     .group_berita .right .list_berita .item_list_berita{
         margin-top: 1vw;
         cursor: pointer;
-        /* background-color: #fff; */
-        color: white;
+        background-color: white;
+        color: var(--primary);
         padding: 0.5vw 1vw;
         border-radius: 10px
     }
@@ -82,7 +82,8 @@
     }
     
     .group_berita .right .list_berita .item_list_berita:hover{
-        background-color: white;
-        color: var(--primary);
+        background-color: #1AB1E5;
+        color:white;
+        border: 1px solid white
     }
 </style>

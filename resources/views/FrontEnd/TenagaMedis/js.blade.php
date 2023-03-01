@@ -1,68 +1,83 @@
 <script>
     var urlPath ={
-        carousel: "{{ route('select.carousel') }}",
-        poli: "{{ route('select.poli') }}",
-        fasilitas: "{{ route('select.fasilitas') }}",
+        tenagaMedis: "{{ route('select.tenagaMedis') }}",
     }
 
     getData()
     
     function getData(){
-        getBerita()
+        getTenagaMedis()
     }
 
-    function getBerita(){
-        for(let i =0; i<3;i++){
-            var active ="";
-            if(i==0){
-                active ="active"
-            }
-            
-            $(".tenaga_medis_list").append(`
-                <div class="carousel-item `+active+`">
-                                <div class="row">
-
-                                    <div class="col-md-4 mb-3">
-                                        <div class="card">
-                                            <img class="img-fluid" alt="100%x280"
-                                                src="https://images.unsplash.com/photo-1532781914607-2031eca2f00d?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=7c625ea379640da3ef2e24f20df7ce8d">
-                                            <div class="card-body">
-                                                <h4 class="card-title">Special title treatment</h4>
-                                                <p class="card-text">With supporting text below as a natural lead-in to
-                                                    additional content.</p>
-
+    function getTenagaMedis(){
+        $.ajax({
+            url: urlPath.tenagaMedis,
+            success: function(response){
+                console.log(response)
+                if(response.length>0){
+                    $.each(response, function( key, value ) {
+                        var url = window.location.origin+'/storage/images/tenaga_medis/'+value.file;
+                        $.ajax({
+                            url: url,
+                            method: "GET",
+                            success: function(data) {
+                                $("#list_tenaga_medis").append(`
+                                    <li>
+                                        <div class="col-12 container_foto ">
+                                            <div class="ver_mas text-center">
+                                                <span class="lnr lnr-eye"></span>
                                             </div>
-
+                                            <article class="text-left">
+                                                <h3>${value.nama}</h3>
+                                                <h4>${value.pekerjaan}</h4>
+                                            </article>
+                                            <img src="${url}"
+                                                alt="">
                                         </div>
-                                    </div>
-                                    <div class="col-md-4 mb-3">
-                                        <div class="card">
-                                            <img class="img-fluid" alt="100%x280"
-                                                src="https://images.unsplash.com/photo-1517760444937-f6397edcbbcd?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=42b2d9ae6feb9c4ff98b9133addfb698">
-                                            <div class="card-body">
-                                                <h4 class="card-title">Special title treatment</h4>
-                                                <p class="card-text">With supporting text below as a natural lead-in to
-                                                    additional content.</p>
-
+                                    </li>
+                                `)
+                            }, error: function(xhr, status, error){
+                                $("#list_tenaga_medis").append(`
+                                    <li>
+                                        <div class="col-12 container_foto ">
+                                            <div class="ver_mas text-center">
+                                                <span class="lnr lnr-eye"></span>
                                             </div>
+                                            <article class="text-left">
+                                                <h3>${value.nama}</h3>
+                                                <h4>${value.pekerjaan}</h4>
+                                            </article>
+                                            <img src="https://img-aws.ehowcdn.com/400x400/ds-img.studiod.com/Half_Dome_from_Glacier_Point0_1.jpg"
+                                                alt="">
                                         </div>
+                                    </li>
+                                `)
+                            }
+                        });
+                        
+                    });
+                } else{
+                    for(let i =0; i<3;i++){                        
+                        $("#list_tenaga_medis").append(`
+                            <li>
+                                <div class="col-12 container_foto ">
+                                    <div class="ver_mas text-center">
+                                        <span class="lnr lnr-eye"></span>
                                     </div>
-                                    <div class="col-md-4 mb-3">
-                                        <div class="card">
-                                            <img class="img-fluid" alt="100%x280"
-                                                src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=3d2e8a2039c06dd26db977fe6ac6186a">
-                                            <div class="card-body">
-                                                <h4 class="card-title">Special title treatment</h4>
-                                                <p class="card-text">With supporting text below as a natural lead-in to
-                                                    additional content.</p>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
+                                    <article class="text-left">
+                                        <h2>TÍTULO DE <br>LA IMAGEN</h2>
+                                        <h4>Descripción corta de la imagen en cuestión</h4>
+                                    </article>
+                                    <img src="https://img-aws.ehowcdn.com/400x400/ds-img.studiod.com/Half_Dome_from_Glacier_Point0_1.jpg"
+                                        alt="">
                                 </div>
-                            </div>
-            `)
-        }
+                            </li>                 
+                        `)
+                    }
+                }
+            }
+        })
+
+
     }
 </script>

@@ -19,7 +19,7 @@ class BeritaController extends BaseController
             $operation = DB::table('berita')->where('id',$request->id)->first();
             $operation = json_decode(json_encode($operation), true);
         } else{
-            $operation = DB::table('berita')->get();
+            $operation = DB::table('berita')->orderBy('created_at', 'desc')->get();
         }
 
         return $operation;
@@ -46,8 +46,10 @@ class BeritaController extends BaseController
         }
 
         if(isset($data['id'])){
+            $data['created_at'] = date('Y-m-d H:i:s');
             $operation = $this->update('berita',$data['id'],$data);
         } else{
+            $data['created_at'] = date('Y-m-d H:i:s');
             $operation = $this->insert('berita',$data);   
         }
 

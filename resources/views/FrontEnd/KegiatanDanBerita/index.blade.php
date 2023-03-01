@@ -6,40 +6,11 @@
     </div>
     <div class="section">
         <div class="group_berita">
-            <div class="left">
-                <img src="https://img-aws.ehowcdn.com/400x400/ds-img.studiod.com/Half_Dome_from_Glacier_Point0_1.jpg" alt="">
-                <div class="bottom-left"><div><h2>Ini Judul Baru </h2><h6>Selasa, 22 Agustus 2023</h6></div></div>
-            </div>
+            <div class="left" id="berita_terbaru"></div>
             <div class="right">
                 <h4>Berita Dan Kegiatan</h4>
                 <div class="line"></div>
-                <div class="list_berita">
-                    <div class="item_list_berita">
-                        <h5>Ini Berita Terknin yang Wajib Kamu lihat disetiap daerah</h5>
-                        <p>Selasa, 3 Desember 2023</p>
-                    </div>
-
-                    <div class="item_list_berita">
-                        <h5>Ini Berita Terknin yang Wajib Kamu lihat disetiap daerah</h5>
-                        <p>Selasa, 3 Desember 2023</p>
-                    </div>
-                    <div class="item_list_berita">
-                        <h5>Ini Berita Terknin yang Wajib Kamu lihat disetiap daerah</h5>
-                        <p>Selasa, 3 Desember 2023</p>
-                    </div>
-                    <div class="item_list_berita">
-                        <h5>Ini Berita Terknin yang Wajib Kamu lihat disetiap daerah</h5>
-                        <p>Selasa, 3 Desember 2023</p>
-                    </div>
-                    <div class="item_list_berita">
-                        <h5>Ini Berita Terknin yang Wajib Kamu lihat disetiap daerah</h5>
-                        <p>Selasa, 3 Desember 2023</p>
-                    </div>
-                    <div class="item_list_berita">
-                        <h5>Ini Berita Terknin yang Wajib Kamu lihat disetiap daerah</h5>
-                        <p>Selasa, 3 Desember 2023</p>
-                    </div>
-                </div>
+                <div class="list_berita"></div>
             </div>
         </div>   
     </div>
